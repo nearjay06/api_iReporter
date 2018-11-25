@@ -7,6 +7,7 @@ app = Flask(__name__)
 incidents = []
 users = []
 
+@app.route('/api/v1/redflags/<int:redflagsid>',methods=['GET'])
 def get_specific_redflag_record_with_id(incidentid):
   for redflag in incidents:
    if redflag['incidentid'] == incidentid:
