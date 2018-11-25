@@ -1,12 +1,12 @@
 import unittest
-from api.routes import endpoints
+from api.routes.endpoints import app
 from api.models.incident import Incidents
 from api.models.user import Users
 import json
 
 class TestEndpoints(unittest.TestCase):
     def setUp(self):
-        self.api = endpoints.test_client()
+        self.api = app.test_client()
 
     def test_get_all_redflag_records(self):
         response = self.app.get('api/v1/redflags')
