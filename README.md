@@ -34,7 +34,7 @@ ENDPOINTS
 
 BUILT WITH
 
--python3
+- python3
 - flask
 
 AUTHOR
