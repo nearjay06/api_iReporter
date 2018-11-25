@@ -22,7 +22,7 @@ def post_red_flag_records():
    videos = flags.get('videos')
    comment = flags.get('comment')
 
-   for redflag in incidents:
+   for redflags in incidents:
     if isinstance(incidentid,str):
       return jsonify ({'message':'incident id must not be a string'}),400
     return jsonify({'incidents': incidents}),201
@@ -61,16 +61,15 @@ def post_red_flag_records():
 #to get all red-flag records GET/red-flags
 @app.route('/api/v1/redflags',methods=['GET'])
 def get_all_redflag_records():
-   for redflags in incidents():
-    if incidents == incidents:
-     return jsonify({'incidents': incidents}),200
-    return jsonify({'message':'there are no redflags in the incidents list'}),400
+  if incidents == incidents:
+    return jsonify({'incidents': incidents}),200
+  return jsonify({'message':'there are no redflags in the incidents list'}),400
 
 #to get a specific red-flag record with an id GET/red-flags/<int:red-flag id>
-@app.route('/api/v1/redflags/<int:redflag id',methods=['GET'])
+@app.route('/api/v1/redflags/<int:redflagid>',methods=['GET'])
 def get_specific_redflag_record_with_id(incidentid):
-  for redflag in incidents:
-   if redflag['incidentid'] == incidentid:
+  for redflags in incidents:
+   if redflags['incidentid'] == incidentid:
     return jsonify({'incidents':incidents,
                    'message':'the red flag was obtained'}),200
    return jsonify({'message':'incident id does not exist'}),400
@@ -81,7 +80,28 @@ def get_specific_redflag_record_with_id(incidentid):
   if not isinstance(incidentid,int):
    return jsonify({'message':'redflag id should be an integer'}),400
 
+#edit a redflag record PATCH/redflags/<int:redflagid>/location
+#PATCH/redflags/<int:redflagid>
+#PATCH/redflags/<redflagid>/comment
 
+#to delete a redflag record DELETE/redflags
+@app.route('api/v1/redflags', methods=['DELETE'])
+def delete_redflag_records():
+  for redflags in incidents:
+    if redflags == incidents:
+      del redflags
+      return jsonify({'message':'incidents list has been deleted'}),200
+    return jsonify ({'message':'incidents list is still in the system'}),410
+      
+#to delete a  specific redflag record DELETE/redflags/<int:redflagid>
+@app.route('api/v1/redflags/<int:redflagid>', methods=['DELETE'])
+def delete_redflag_record_with_id(incidentid):
+  for redflags in incidents:
+    if redflags['incidentid'] == incidentid:
+      del incidents[redflags]
+      return jsonify({'message':'redflag has been deleted'}),200
+    return jsonify ({'message':'redflag is still in the incidents list'}),410
+      
 
 
 
