@@ -28,9 +28,9 @@ RUNNING THE PROJECT
 ENDPOINTS
 - Create a red -flag record i.e POST/red-flags
 - Get all red-flag records i.e GET/red-flags
-- Get a specific red-flag record i.e GET/red-flags/<red-flag-id>
-- Edit a specific red-flag record i.e PATCH/red-flags/<red-flag-id>/location
-- Delete a red-flag record i.e DELETE/red-flags/<red-flag-id>
+- Get a specific red-flag record i.e GET/red-flags/red-flag-id
+- Edit a specific red-flag record i.e PATCH/red-flags/red-flag-id/location
+- Delete a red-flag record i.e DELETE/red-flags/red-flag-id
 
 BUILT WITH
 
