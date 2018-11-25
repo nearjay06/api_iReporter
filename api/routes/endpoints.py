@@ -22,7 +22,7 @@ def post_red_flag_records():
    videos = flags.get('videos')
    comment = flags.get('comment')
 
-   for red-flag in incidents:
+   for redflag in incidents:
     if isinstance(incidentid,str):
       return jsonify ({'message':'incident id must not be a string'}),400
     return jsonify({'incidents': incidents}),201
@@ -51,6 +51,12 @@ def post_red_flag_records():
     
     if not comment:
      return jsonify({'message':'comments are needed for the redflag'}),400
+
+
+    incident = Incidents(incidentid,createdOn,createdBy,type,location,status,images,videos,comment)
+    incidents.append(incidents)
+    return jsonify(incidents),201
+
 
 #to get all red-flag records GET/red-flags
 @app.route('/api/v1/redflags',methods=['GET'])
