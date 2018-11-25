@@ -90,8 +90,8 @@ def delete_redflag_records():
   for redflags in incidents:
     if redflags == incidents:
       del redflags
-      return jsonify({'message':'incidents list has been deleted'}),200
-    return jsonify ({'message':'incidents list is still in the system'}),410
+      return jsonify({'message':'redflags have been deleted'}),200
+    return jsonify ({'message':'redflags are still in the system'}),410
       
 #to delete a  specific redflag record DELETE/redflags/<int:redflagid>
 @app.route('api/v1/redflags/<int:redflagid>', methods=['DELETE'])
