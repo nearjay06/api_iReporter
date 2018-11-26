@@ -1,11 +1,12 @@
 import datetime
 
 class Incidents():
-    def __init__(self,incidentid,createdOn,createdBy,type,location,status,images,videos,comment):
-      self.incidentid = incidentid
-      self.createdOn = datetime.datetime.now()
-      self.createdBy = createdBy
-      self.type = type
+    def __init__(self,incident_id,created_on,created_by,incident_type,location,status,
+                 images,videos,comment):
+      self.incident_id = incident_id
+      self.created_on = datetime.datetime.now()
+      self.created_by = created_by
+      self.incident_type = incident_type
       self.location = location
       self.status = status
       self.images = images
@@ -15,10 +16,10 @@ class Incidents():
 
     def create_redflag(self):
       flags = {
-         "incidentid":self.incidentid,
-         "createdOn": self.createdOn,
-         "createdBy": self.createdBy,
-         "type": self.type,
+         "incident_id":self.incident_id,
+         "created_on": self.created_on,
+         "created_by": self.created_by,
+         "incident_type": self.incident_type,
          "location": self.location,
          "status": self.status,
          "images": self.images,

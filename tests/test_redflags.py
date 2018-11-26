@@ -1,7 +1,8 @@
 import unittest
-from api.routes.endpoints import app
+from api.routes.redflag_endpoints import app
 from api.models.incident import Incidents
-from api.models.user import Users
+from api.validations import valid
+
 import json
 
 class TestEndpoints(unittest.TestCase):
