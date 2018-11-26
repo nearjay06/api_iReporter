@@ -83,7 +83,7 @@ def get_specific_redflag_record_with_id(incidentid):
    return jsonify({'message':'redflag id should be an integer'}),400
 
 @app.route('/api/v1/redflags/<int:redflagid>/location',methods=['PATCH'])
-def edit_redflag_record_location(incidentid):
+def edit_redflag_record_location_with_id(incidentid):
   for redflags in incidents_list:
     if redflags['incidentid'] == incidentid:
       redflags.patch('location')
@@ -93,7 +93,7 @@ def edit_redflag_record_location(incidentid):
 incidents_list.append(incidents_list)
 
 @app.route('/api/v1/<int:redflag>/comment',methods=['PATCH'])
-def edit_redflag_record_comment(incidentid):
+def edit_redflag_record_comment_with_id(incidentid):
   for redflags in incidents_list:
     if redflags['incidentid'] == incidentid:
       redflags.patch('comment')
@@ -118,7 +118,7 @@ def delete_redflag_records():
       
 #to delete a  specific redflag record DELETE/redflags/<int:redflagid>
 @app.route('/api/v1/redflags/<int:redflagid>', methods=['DELETE'])
-def delete_redflag_record_with_id(incidentid):
+def delete_specific_redflag_record_with_id(incidentid):
   for redflags in incidents_list:
     if redflags['incidentid'] == incidentid:
       del incidents_list[redflags]

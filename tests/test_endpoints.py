@@ -30,19 +30,28 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.get('/api/v1/redflags/1')
         self.assertNotIn('username',Incidents,"message")
 
-    def test_delete_redflag_records(self):
-        response = self.app.delete('/api/v1/redflags')
-        self.assertEqual(response.content_type,'text/html')
+    def test_get_specific_redflag_with_id(self):
+        response = self.app.get('/api/v1/redflags/1')
+        self.assertEqual(response.content_type,'application/json')
 
     def test_delete_redflag_records(self):
         response = self.app.delete('/api/v1/redflags')
+        self.assertEqual(response.content_type,'application/json')
+
+    def test_delete_redflag_record_with_id(self):
+        response = self.app.delete('/api/v1/redflags/1')
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')
 
+    def test_edit_redflag_record_location(self):
+        response = self.app.patch('/api/v1/redflags/1/location')
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.content_type,'application/json')
 
-
-
-
+    def test_edit_redflag_record_comment(self):
+        response = self.app.patch('/api/v1/redflags/1/comment')
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.content_type,'application/json')
 
 
 
