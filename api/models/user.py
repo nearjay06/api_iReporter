@@ -13,8 +13,8 @@ class Users:
       self.isAdmin = isAdmin
 
 
-    def create_users(self):
-      uploads = {
+    def user_dictionary(self):
+      users = {
              "userid":self.userid,
              "firstname":self.firstname,
              "lastname":self.lastname,
@@ -26,4 +26,4 @@ class Users:
              "isAdmin":self.isAdmin
         }
 
-      return uploads
+      return users
