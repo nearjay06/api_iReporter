@@ -6,10 +6,10 @@ import json
 
 class TestEndpoints(unittest.TestCase):
     def setUp(self):
-        self.api = app.test_client()
+        self.app = app.test_client()
 
     def test_get_all_redflag_records(self):
-        response = self.app.get('api/v1/redflags')
+        response = self.app.get('/api/v1/redflags')
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')
 
@@ -21,13 +21,23 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.post('/api/v1/redflags')
         self.assertTrue({'incident id must not be a string','message'},True)
 
+    def test_post_redflag_records(self):
+        response = self.app.post('/api/v1/redflags')
+        self.assertEqual(response.status_code,201)
+        self.assertEqual(response.content_type,'application/json')
+
     def test_get_specific_redflag_with_id(self):
         response = self.app.get('/api/v1/redflags/1')
-        self.assertNotIn('status',Users,"message")
+        self.assertNotIn('username',Incidents,"message")
 
+    def test_delete_redflag_records(self):
+        response = self.app.delete('/api/v1/redflags')
+        self.assertEqual(response.content_type,'text/html')
 
-
-
+    def test_delete_redflag_records(self):
+        response = self.app.delete('/api/v1/redflags')
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.content_type,'application/json')
 
 
 
