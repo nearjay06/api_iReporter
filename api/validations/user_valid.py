@@ -29,10 +29,10 @@ def check_user_id(user_id):
     if not user_id or user_id.isspace or isinstance(user_id,str):
      return jsonify({'message':'user id is required and it should be an integer'}),400
 
-def update_phone_number(user_id,phone_number):
-     data = request.get_json()
-     phone_number = request.get('phone_number')
-     if user_id == user_id:
-      phone_number == phone_number:
+# def update_phone_number(user_id,phone_number):
+#      data = request.get_json()
+#      phone_number = request.get('phone_number')
+#      if user_id == user_id:
+#       'phone_number' == phone_number
 
-     return jsonify({'message':'phone number has not been updated'}),400
+#      return jsonify({'message':'phone number has not been updated'}),400

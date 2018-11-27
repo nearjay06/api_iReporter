@@ -1,5 +1,7 @@
 from api.routes.redflag_endpoints import app
 from api.routes.user_endpoints import app
+from api.routes.intervention_endpoints import app
+
 
 
 

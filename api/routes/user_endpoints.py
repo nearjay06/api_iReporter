@@ -3,7 +3,8 @@ from api.models.user import Users
 import json
 from api.validations.user_valid import validate_first_name,validate_last_name,validate_email
 from api.validations.user_valid import validate_username,validate_other_names,validate_phone_number
-from api.validations.user_valid import check_user_id,update_phone_number
+from api.validations.user_valid import check_user_id 
+# update_phone_number
 
 app = Flask(__name__)
 
@@ -55,13 +56,13 @@ def get_specific_user_with_id(user_id):
 
     return jsonify({'user_list':user_list}),201
   
-@app.route('/api/v1/users/<int:user_id>/phonenumber',methods=['PATCH'])
-def edit_phone_number_with_user_id(user_id,phone_number):
-    for user in user_list:
-     update_phone_number(phone_number)
+# @app.route('/api/v1/users/<int:user_id>/phonenumber',methods=['PATCH'])
+# def edit_phone_number_with_user_id(user_id,phone_number):
+#     for user in user_list:
+#      update_phone_number(phone_number)
 
-    return jsonify({'message': 'phonenumber has been updated'}),200
-    user_list.append(user_list)
+#     return jsonify({'message': 'phonenumber has been updated'}),200
+#     user_list.append(user_list)
 
 
 
