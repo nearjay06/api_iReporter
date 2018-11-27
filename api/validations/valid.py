@@ -5,10 +5,6 @@ def validate_status(status):
     if status.isspace() or not status or not isinstance(status,str):
       return jsonify ({'message':'status is not in the list'}),400
 
-def validate_redflags_list(redflags_list):
-    if redflags_list == redflags_list():
-      return jsonify(redflags_list),201
-
 def check_created_by(created_by):
     if not created_by or not isinstance(created_by,int):
       return jsonify({'message':'createdby should  be a string'}),400
@@ -29,3 +25,25 @@ def validate_images(images):
     if not images or len(images) == 0 or not isinstance(images,str):
       return jsonify ({'message':'sorry! the red-flag should have an image which should be a string'}),400
 
+def validate_incident_id(incident_id):
+    if not incident_id or incident_id.isspace() or not isinstance(incident_id,int):
+        return jsonify ({'message':'invalid!incident id is not in the system'}),400
+            
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+def validate_interventions_list(interventions_list):
+    if interventions_list.isspace():
+      return jsonify({'message':'there are no items in the interventions list'),400

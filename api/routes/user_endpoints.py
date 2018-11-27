@@ -64,12 +64,6 @@ def get_specific_user_with_id(user_id):
 #     return jsonify({'message': 'phonenumber has been updated'}),200
 #     user_list.append(user_list)
 
-
-
-
-
-
-
 # def edit_redflag_record_location_with_id(incident_id):
 #  @app.route('/api/v1/<int:user_id>/comment',methods=['PATCH'])
 # def edit_redflag_record_comment_with_id(incident_id):
