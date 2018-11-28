@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from api.models.incident import Incidents,Interventions
 from api.validations.valid import validate_status, check_created_by,check_location,check_comment
-from api.validations.valid import check_videos,validate_redflags_list, validate_images
+from api.validations.valid import check_videos,validate_images
 from api.validations.valid import validate_incident_id
 
 import json
