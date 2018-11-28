@@ -14,7 +14,7 @@ class Users:
       self.isAdmin = isAdmin
 
 
-    def user_dictionary(self):
+    def user_dict(self):
       users = {
              "user_id":self.user_id,
              "first_name":self.first_name,

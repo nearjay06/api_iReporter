@@ -40,8 +40,7 @@ def post_redflag_records():
     check_comment(comment)
 
 
-    redflags = Incidents(incident_id,created_on,created_by,location,
-                         status,images,videos,comment)
+    redflags = Incidents(incident_id,created_on,created_by,location,status,images,videos,comment)
     redflags_list.append(redflags.to_dict_redflag())
     return jsonify(redflags_list),201
 

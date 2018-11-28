@@ -30,7 +30,6 @@ def validate_incident_id(incident_id):
         return jsonify ({'message':'invalid!incident id is not in the system'}),400
             
 
-    
 
 
 
@@ -46,4 +45,4 @@ def validate_incident_id(incident_id):
 
 def validate_interventions_list(interventions_list):
     if interventions_list.isspace():
-      return jsonify({'message':'there are no items in the interventions list'),400
+      return jsonify({'message':'there are no items in the interventions list'}),400

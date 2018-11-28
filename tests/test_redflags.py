@@ -11,9 +11,11 @@ class TestEndpoints(unittest.TestCase):
 
     def test_get_all_redflag_records(self):
         response = self.app.get('/api/v1/redflags')
+        response = json.loads(response.data)
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')
         self.assertNotIsInstance('email',Redflags,"message")
+        self.assertEqual(len,(response),9)
 
     def test_post_redflag_records(self):
         response = self.app.post('/api/v1/redflags')
@@ -31,12 +33,13 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.patch('/api/v1/redflags/1/location')
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')
-        self.assertFalse({'incident id must not be a string','message'},False)
+        self.assertFalse({'incident id must be a string','message'},False)
 
     def test_edit_redflag_record_comment(self):
         response = self.app.patch('/api/v1/redflags/1/comment')
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')
+        self.assertTrue("comment has been updated","message",True)
 
     def test_delete_redflag_record_with_id(self):
         response = self.app.delete('/api/v1/redflags/1')
