@@ -29,7 +29,15 @@ def validate_incident_id(incident_id):
     if not incident_id or incident_id.isspace() or not isinstance(incident_id,int):
         return jsonify ({'message':'invalid!incident id is not in the system'}),400
             
+def validate_redflag_location_with_id(location):
+    item1 = location[0]
+    item2 = location[1]
+    return isinstance(location, list) and isinstance(item1, float) and isinstance(item2, float)
 
+def validate_intervention_location_with_id(location):
+    item1 = location[0]
+    item2 = location[1]
+    return isinstance(location, list) and isinstance(item1, float) and isinstance(item2, float)
 
 
 

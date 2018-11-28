@@ -29,3 +29,5 @@ def check_user_id(user_id):
     if not user_id or user_id.isspace() or isinstance(user_id,str):
      return jsonify({'message':'user id is required and it should be an integer'}),400
 
+def certify_phone_number_with_user_id(phone_number):
+    return isinstance(phone_number, list)

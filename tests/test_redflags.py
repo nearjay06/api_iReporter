@@ -1,6 +1,6 @@
 import unittest
 from api.routes.redflag_endpoints import app
-from api.models.incident import Incidents, Redflags
+from api.models.incident import Incidents, Redflags, redflags_list
 from api.validations import valid
 
 import json
@@ -9,13 +9,17 @@ class TestEndpoints(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
 
+    def tearDown(self):
+        redflags_list.clear()
+        
+
     def test_get_all_redflag_records(self):
         response = self.app.get('/api/v1/redflags')
         response = json.loads(response.data)
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')
         self.assertNotIsInstance('email',Redflags,"message")
-        self.assertEqual(len,(response),9)
+        self.assertEqual(len(response),9)
 
     def test_post_redflag_records(self):
         response = self.app.post('/api/v1/redflags')
@@ -42,6 +46,16 @@ class TestEndpoints(unittest.TestCase):
         self.assertTrue("comment has been updated","message",True)
 
     def test_delete_redflag_record_with_id(self):
+        data = {
+                "created_by": "rth",
+                "incident_type":"redflag",
+                "location":"dsdsds",
+                "status": "under investigation",
+                "images": "http://perilofafrica.com/uk-investors-irked-by-bureaucracy-corruption-in-uganda/",
+                "videos": "https://www.youtube.com/watch?v=ZmD_VoCTeCc",
+                "comment":"comment"	
+	            }
+        self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
         response = self.app.delete('/api/v1/redflags/1')
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')

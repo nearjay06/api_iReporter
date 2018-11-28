@@ -1,7 +1,6 @@
-from flask import Flask
-from api.routes.redflag_endpoints import app
-from api.routes.user_endpoints import app
-from api.routes.intervention_endpoints import app
+
+from api.routes import redflag_endpoints,intervention_endpoints,user_endpoints
+from api import app
 
 
 

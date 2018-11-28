@@ -1,29 +1,24 @@
 import datetime
+
+redflags_list = []
+interventions_list = []
 class Incidents():
-    def __init__(self,incident_id,created_on,created_by,location,status,
+    def __init__(self,incident_id,created_on,created_by,incident_type,location,status,
                  images,videos,comment):
       self.incident_id = incident_id
       self.created_on = datetime.datetime.now()
       self.created_by = created_by
+      self.incident_type = incident_type
       self.location = location
       self.status = status
       self.images = images
       self.videos = videos
       self.comment = comment
 
-class Redflags(Incidents):
-    def __init__(self,incident_id,created_on,created_by,location,status,
-                         images,videos,comment):
-      Incidents.__init__(self,incident_id,created_on,created_by,location,status,
-                         images,videos,comment)
-      
-      self.incident_type = 'redflag'
-
     def to_dict_redflag(self):
       flags = {
 
          "incident_id":self.incident_id,
-         "redflag_id": self.redflag_id,
          "created_on": self.created_on,
          "created_by": self.created_by,
          "incident_type": self.incident_type,
@@ -36,13 +31,6 @@ class Redflags(Incidents):
        }
 
       return flags
-
-class Interventions(Incidents):
-    def __init__(self,incident_id,created_on,created_by,location,status,
-                 images,videos,comment):
-        Incidents.__init__(self,incident_id,created_on,created_by,location,status,
-                 images,videos,comment)
-        self.incident_type = 'intervention'
 
     def to_dict_intervention(self):
       intervene = {
@@ -60,3 +48,19 @@ class Interventions(Incidents):
        }
 
       return intervene
+
+class Redflags(Incidents):
+    def __init__(self,incident_id,created_on,created_by,incident_type,location,status,
+                         images,videos,comment):
+      Incidents.__init__(self,incident_id,created_on,created_by,incident_type,location,status,
+                         images,videos,comment)
+      self.incident_type = 'redflag'
+
+class Interventions(Incidents):
+    def __init__(self,incident_id,created_on,created_by,incident_type,location,status,
+                 images,videos,comment):
+        Incidents.__init__(self,incident_id,created_on,created_by,incident_type,location,status,
+                 images,videos,comment)
+        self.incident_type = 'intervention'
+
+    

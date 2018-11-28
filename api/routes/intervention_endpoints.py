@@ -1,14 +1,14 @@
 from flask import Flask, jsonify, request
 from api.models.incident import Incidents,Interventions
+from api.controllers.control import edit_intervention_location,edit_intervention_comment
+from api.controllers.control import delete_intervention
 from api.validations.valid import validate_status, check_created_by,check_location,check_comment
 from api.validations.valid import check_videos,validate_images
 from api.validations.valid import validate_incident_id
+from api.models.incident import interventions_list
+from api import app
 
 import json
-
-app = Flask(__name__)
-
-interventions_list = []
 
 @app.route('/api/v1/interventions',methods=['POST'])
 def post_intervention():
@@ -37,7 +37,7 @@ def post_intervention():
     
     check_comment(comment)
 
-    interventions = Incidents(incident_id,created_on,created_by,location,
+    interventions = Incidents(incident_id,created_on,created_by,incident_type,location,
                               status,images,videos,comment)
     interventions_list.append(interventions.to_dict_intervention())
     return jsonify(interventions_list),201
@@ -56,40 +56,16 @@ def get_specific_intervention_record_with_id(incident_id):
 
 @app.route('/api/v1/interventions/<int:incident_id>/location',methods=['PATCH'])
 def update_intervention_record_location_with_id(incident_id):
+  return edit_intervention_location(incident_id)
   
-  location = ["300.64 N", "81.63 E"]
-  float_list = [ float(x) for x in location]
-  print (float_list) 
-
-  data = data.get_json()
-  location = data.get('location')
-  for intervention in interventions_list:
-    if intervention['incident_id'] == incident_id:
-      intervention['location'] = location
-      return jsonify({'interventions_list':interventions_list,
-                      'message': 'location has been updated'}),200
-    return jsonify({'message':'location has not been updated'}),400
-
-    interventions_list.append(interventions_list)
-
 
 @app.route('/api/v1/interventions/<int:incident_id>/comment',methods=['PATCH'])
 def update_intervention_comment_with_id(incident_id):
-  data = request.get_json()
-  comment = data.get('comment')
-  for intervention in interventions_list:
-    if intervention['incident_id'] == incident_id:
-      intervention['comment'] = comment
-      return jsonify({'interventions_list': interventions_list,
-                      'message':'comment has been updated'}),200
-    return jsonify({'message':'comment has not been updated'}),400
+  return edit_intervention_comment(incident_id)
+  
 
 
 @app.route('/api/v1/interventions/<int:incident_id>', methods=['DELETE'])
 def delete_specific_intervention_with_id(incident_id):
-  for intervention in interventions_list:
-    if intervention['incident_id'] == incident_id:
-      interventions_list.remove(intervention)
-
-      return jsonify({'message':'intervention has been deleted'}),200
-    return jsonify ({'message':'old intervention record is still in the list'}),410
+  return delete_intervention(incident_id)
+  

@@ -1,5 +1,7 @@
 import datetime
 
+user_list = []
+
 class Users:
     def __init__(self, user_id, first_name, last_name, other_names, email, phone_number, username,
                  registered,isAdmin):
