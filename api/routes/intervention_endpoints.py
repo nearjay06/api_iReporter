@@ -44,14 +44,14 @@ def post_intervention():
 
 @app.route('/api/v1/interventions',methods=['GET'])
 def get_all_intervention_records():
-    return jsonify({'interventions_list': interventions_list}),201
+    return jsonify({'interventions_list': interventions_list}),200
 
 @app.route('/api/v1/interventions/<int:incident_id>',methods=['GET'])
 def get_specific_intervention_record_with_id(incident_id):
   for intervention in interventions_list:
     validate_incident_id(incident_id)
    
-  return jsonify({'interventions_list':interventions_list,
+  return jsonify({'interventions_list':intervention,
                    'message':'intervention is in the list'}),200
 
 @app.route('/api/v1/interventions/<int:incident_id>/location',methods=['PATCH'])

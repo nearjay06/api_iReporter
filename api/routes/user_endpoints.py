@@ -53,7 +53,7 @@ def get_specific_user_with_id(user_id):
     for user in user_list:
      check_user_id(user_id)
 
-    return jsonify({'user_list':user_list,
+    return jsonify({'user_list': user,
                     'message':'user is in the list'}),200
   
 @app.route('/api/v1/users/<int:user_id>/phone_number',methods=['PATCH'])

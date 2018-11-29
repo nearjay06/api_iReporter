@@ -35,7 +35,6 @@ class Incidents():
     def to_dict_intervention(self):
       intervene = {
          "incident_id":self.incident_id,
-         "intervention_id" : self.intervention_id,
          "created_on": self.created_on,
          "created_by": self.created_by,
          "incident_type": self.incident_type,

@@ -12,7 +12,6 @@ class TestEndpoints(unittest.TestCase):
     def tearDown(self):
         redflags_list.clear()
         
-
     def test_get_all_redflag_records(self):
         data = {
                  "incident_id": 1,
@@ -73,16 +72,30 @@ class TestEndpoints(unittest.TestCase):
         self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
         response = self.app.get('/api/v1/redflags/1')
         self.assertEqual(response.status_code,200)
-        self.assertEqual(response.content_type,'application/json')
-        self.assertNotIn('username',Redflags,"message")
-
-
+        self.assertIsInstance(data,dict)
         
+    def test_update_redflag_record_location(self):
+        response = self.app.patch('/api/v1/redflags/1/location') 
+        self.assertTrue({'incident id must be a string','message'},True)   
+    
     def test_edit_redflag_record_location(self):
+        data = {
+                "incident_id": 1,
+                "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
+                "created_by": "rth",
+                "incident_type":"redflag",
+                "location":"dsdsds",
+                "status": "under investigation",
+                "images": "http://perilofafrica.com/uk-investors-irked-by-bureaucracy-corruption-in-uganda/",
+                "videos": "https://www.youtube.com/watch?v=ZmD_VoCTeCc",
+                "comment":"comment"	
+	            }
+        
+        self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
         response = self.app.patch('/api/v1/redflags/1/location')
         self.assertEqual(response.status_code,200)
-        self.assertEqual(response.content_type,'application/json')
-        self.assertFalse({'incident id must be a string','message'},False)
+              
+        
 
     def test_edit_redflag_record_comment(self):
         data = {
@@ -102,6 +115,8 @@ class TestEndpoints(unittest.TestCase):
         self.assertEqual(response.content_type,'application/json')
         self.assertTrue("comment has been updated","message",True)
 
+
+
     def test_delete_redflag_record_with_id(self):
         data = {
                 "incident_id": 1,
@@ -118,19 +133,7 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.delete('/api/v1/redflags/1')
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.content_type,'application/json')
-
-    
-
-
-
-
-
-
-
-
-
-
-
+        self.assertIsInstance(data,dict)
 
 
 

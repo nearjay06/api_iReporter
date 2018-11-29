@@ -9,6 +9,32 @@ class TestEndpoints(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
 
+def test_get_all_users(self):
+    items={
+        "email": "joan@gmail.com",
+        "first_name": "dalai",
+        "isAdmin": "false",
+        "last_name": "ann",
+        "other_names": "mermaid",
+        "phone_number": "abcdefg",
+        "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
+        "user_id": 3,
+        "username": "trickster"
+    }
+    self.app.post('/api/v1/users', content_type= 'application/json', data = json.dumps(items))
+    response = self.app.get('/api/v1/users')
+    # response = json.loads(response.data)
+    self.assertEqual(response.status_code,200)
+    self.assertEqual(len,(response),9)
+
+
+
+
+
+
+
+
+
 
 def test_post_user_record(self):
     response = self.app.post('/api/v1/users')
@@ -36,12 +62,7 @@ def test_post_user_record_returns_errors(self):
         content=response.get_json()
         print(content)
 
-def test_get_all_users(self):
-    response = self.app.get('/api/v1/users')
-    response = json.loads(response.data)
-    self.assertEqual(response.status_code,200)
-    self.assertEqual(response.content_type,'application/json')
-    self.assertEqual(len,(response),9)
+
 
 def test_get_user_with_id(self):
     response = self.app.get('/api/v1/users/1')
