@@ -1,6 +1,7 @@
 import unittest
 from api.routes.intervention_endpoints import app
 from api.models.incident import Incidents, Interventions,interventions_list
+from api.controllers import control
 from api.validations import valid
 
 import json

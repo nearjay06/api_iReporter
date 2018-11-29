@@ -112,7 +112,6 @@ class TestEndpoints(unittest.TestCase):
         self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
         response = self.app.patch('/api/v1/redflags/1/comment')
         self.assertEqual(response.status_code,200)
-        self.assertEqual(response.content_type,'application/json')
         self.assertTrue("comment has been updated","message",True)
 
 
