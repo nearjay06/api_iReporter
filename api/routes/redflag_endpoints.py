@@ -54,11 +54,10 @@ def get_specific_redflag_record_with_id(incident_id):
   for redflag in redflags_list:
     validate_incident_id(incident_id)
    
-  return jsonify({'redflags_list':redflags_list,
+  return jsonify({'redflags_list':redflag,
                    'message':'redflag is in the list'}),200
 
    
-  
 @app.route('/api/v1/redflags/<int:incident_id>/location',methods=['PATCH'])
 def edit_redflag_record_location_with_id(incident_id):
     return edit_location(incident_id)
