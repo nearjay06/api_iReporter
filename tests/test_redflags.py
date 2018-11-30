@@ -53,7 +53,7 @@ class TestEndpoints(unittest.TestCase):
                                   data=json.dumps(data)
         
         )
-        self.assertEqual(response.status_code,201)
+        self.assertEqual(response.status_code,200)
         
 
     def test_get_specific_redflag_with_id(self):
@@ -90,9 +90,15 @@ class TestEndpoints(unittest.TestCase):
                 "videos": "https://www.youtube.com/watch?v=ZmD_VoCTeCc",
                 "comment":"comment"	
 	            }
+
+        change_location = {
+                            "location": "lugazi"
+                          }
         
         self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
-        response = self.app.patch('/api/v1/redflags/1/location')
+        response = self.app.patch('/api/v1/redflags/1/location', content_type= 'application/json', 
+                                   data = json.dumps(change_location))
+        res = json.loads(response.data.decode())
         self.assertEqual(response.status_code,200)
               
         
@@ -109,11 +115,19 @@ class TestEndpoints(unittest.TestCase):
                 "videos": "https://www.youtube.com/watch?v=ZmD_VoCTeCc",
                 "comment":"comment"	
 	            }
-        self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
-        response = self.app.patch('/api/v1/redflags/1/comment')
-        self.assertEqual(response.status_code,200)
-        self.assertIn("comment has been updated", data['comment']) 
 
+        edited_data = {
+                         
+                "comment":"like"	
+	            }
+
+         
+        self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
+        response = self.app.patch('/api/v1/redflags/1/comment',content_type= 'application/json',
+                                  data = json.dumps(edited_data))
+        res = json.loads(response.data.decode())
+        self.assertEqual(response.status_code,200)
+        self.assertIn("updated red-flag record comment", res['message']) 
 
 
     def test_delete_redflag_record_with_id(self):

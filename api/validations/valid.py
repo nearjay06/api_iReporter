@@ -27,9 +27,12 @@ def validate_images(images):
 
 def validate_incident_id(incident_id):
     if not incident_id or not isinstance(incident_id,int) or incident_id <= 0:
-        return jsonify ({'message':'invalid!incident id is not in the system'}),400
+        return jsonify ({'message':'invalid!redflag incident id is not in the system'}),400
 
-           
+def validate_intervention_incident_id(incident_id):
+    if not incident_id or not isinstance(incident_id,int) or incident_id <= 0:
+        return jsonify ({'message':'invalid!intervention incident id is not in the system'}),400
+
 def validate_redflag_location_with_id(location):
     item1 = location[0]
     item2 = location[1]

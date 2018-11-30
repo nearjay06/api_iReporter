@@ -1,6 +1,6 @@
 from flask import jsonify, request
 from api.models.incident import Incidents,Redflags
-from api.controllers.control import edit_location,edit_comment,delete_redflag
+from api.controllers.control import edit_location,edit_comment,delete_redflag,get_specific_redflag
 import json
 from api.validations.valid import validate_status, check_created_by,check_location,check_comment
 from api.validations.valid import check_videos,validate_images,validate_redflag_location_with_id
@@ -41,28 +41,28 @@ def post_redflag_records():
 
     redflags = Incidents(incident_id,created_on,created_by,incident_type,location,status,images,videos,comment)
     redflags_list.append(redflags.to_dict_redflag())
-    return jsonify(redflags_list),201
-
+    return jsonify({
+         'status': 201,
+         'data': redflags_list,
+         'message': 'Created red flag record'
+    }),200
 
 @app.route('/api/v1/redflags',methods=['GET'])
 def get_all_redflag_records():
-    return jsonify({'reflags_list': redflags_list}),200
+    return jsonify({'status': 200,
+                    'data': redflags_list}),200
     
 
 @app.route('/api/v1/redflags/<int:incident_id>',methods=['GET'])
 def get_specific_redflag_record_with_id(incident_id):
-    for redflag in redflags_list:
-        validate_incident_id(incident_id)
+    return get_specific_redflag(incident_id)
+    
+    validate_incident_id(incident_id)
    
-    return jsonify({'redflags_list':redflag,
-                   'message':'redflag is in the list'}),200
-
- 
 @app.route('/api/v1/redflags/<int:incident_id>/location',methods=['PATCH'])
 def edit_redflag_record_location_with_id(incident_id):
     return edit_location(incident_id)
     
-
 @app.route('/api/v1/redflags/<int:incident_id>/comment',methods=['PATCH'])
 def edit_redflag_record_comment_with_id(incident_id):
     return edit_comment(incident_id)
