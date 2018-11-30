@@ -51,8 +51,8 @@ def get_all_users():
 @app.route('/api/v1/users/<int:user_id>',methods=['GET'])
 def get_specific_user_with_id(user_id):
     for user in user_list:
-     check_user_id(user_id)
-
+        check_user_id(user_id)
+        
     return jsonify({'user_list': user,
                     'message':'user is in the list'}),200
   
@@ -60,7 +60,6 @@ def get_specific_user_with_id(user_id):
 def edit_phone_number_with_user_id(user_id):
     return check_phone_number_user_id(user_id)
      
- 
 @app.route('/api/v1/users/<int:user_id>/email',methods=['PATCH'])
 def edit_user_email_with_id(user_id):
     return check_email_user_id(user_id)

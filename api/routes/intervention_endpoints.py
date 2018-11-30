@@ -44,7 +44,7 @@ def post_intervention():
 
 @app.route('/api/v1/interventions',methods=['GET'])
 def get_all_intervention_records():
-    return jsonify({'interventions_list': interventions_list}),200
+  return jsonify({'interventions_list': interventions_list}),200
 
 @app.route('/api/v1/interventions/<int:incident_id>',methods=['GET'])
 def get_specific_intervention_record_with_id(incident_id):
@@ -63,8 +63,6 @@ def update_intervention_record_location_with_id(incident_id):
 def update_intervention_comment_with_id(incident_id):
   return edit_intervention_comment(incident_id)
   
-
-
 @app.route('/api/v1/interventions/<int:incident_id>', methods=['DELETE'])
 def delete_specific_intervention_with_id(incident_id):
   return delete_intervention(incident_id)
