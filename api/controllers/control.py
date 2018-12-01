@@ -41,16 +41,16 @@ def delete_redflag(incident_id):
   #return jsonify({'message':'redflag is still in the list'}),400
 
 def edit_intervention_location(incident_id):
-  data = request.get_json()
-  location = request.get('location')
-  for intervention in interventions_list:
-    if intervention['incident_id'] == incident_id:
-      intervention['location'] = location
-      return jsonify({
-                      'status':200,
-                      'data': intervention,       
-                      'message':'updated intervention record location'}),200
-  return jsonify({'message':'intervention record location has not been updated'}),400
+ data = request.get_json()
+ location = data.get('location')
+ for intervention in interventions_list:
+   if intervention['incident_id'] == incident_id:
+     intervention['location'] = location
+     return jsonify({
+                    'status':200,
+                    'data': intervention,       
+                    'message':'updated intervention record location'}),200
+ return jsonify({'message':'intervention record location has not been updated'}),400
 
 def edit_intervention_comment(incident_id):
  data = request.get_json()

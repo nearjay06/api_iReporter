@@ -41,7 +41,7 @@ def post_intervention():
                               status,images,videos,comment)
     interventions_list.append(interventions.to_dict_intervention())
     return jsonify({
-                    'status': 201,
+                    'status': 200,
                     'data': interventions_list,
                     'message': 'Created intervention record'
                }),200
