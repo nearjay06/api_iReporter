@@ -1,4 +1,4 @@
-https://travis-ci.org/nearjay06/api_iReporter.svg?branch=develop
+[![Build Status](https://travis-ci.org/nearjay06/api_iReporter.svg?branch=develop)](https://travis-ci.org/nearjay06/api_iReporter)
 
 [![Coverage Status](https://coveralls.io/repos/github/nearjay06/api_iReporter/badge.svg?branch=develop)](https://coveralls.io/github/nearjay06/api_iReporter?branch=develop)
 
