@@ -1,3 +1,11 @@
+https://travis-ci.org/nearjay06/api_iReporter.svg?branch=develop
+
+[![Coverage Status](https://coveralls.io/repos/github/nearjay06/api_iReporter/badge.svg?branch=develop)](https://coveralls.io/github/nearjay06/api_iReporter?branch=develop)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/db3adc0af34643761152/maintainability)](https://codeclimate.com/github/nearjay06/api_iReporter/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/db3adc0af34643761152/test_coverage)](https://codeclimate.com/github/nearjay06/api_iReporter/test_coverage)
+
 IREPORTER
 
 iReporter is a platform that enables citizens to report incidences of corruption to local authorities and also bring to attention issues that require government intervention.Users can use the platform to create red-flag records,get all red-flag records,get specific red-flag records,edit specific red-flag records and delete red-flag records.
