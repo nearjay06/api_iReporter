@@ -45,6 +45,10 @@ BUILT WITH
 - python3
 - flask
 
+LICENSE
+
+Andela-Uganda
+
 AUTHOR
 
 Okecho Joan
