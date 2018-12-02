@@ -3,7 +3,7 @@ from api.models.incident import Incidents,Interventions
 from api.controllers.control import edit_intervention_location,edit_intervention_comment
 from api.controllers.control import delete_intervention,get_specific_intervention
 from api.validations.valid import validate_status, check_created_by,check_location,check_comment
-from api.validations.valid import check_videos,validate_images
+from api.validations.valid import check_videos,validate_images,validate_incident_type,validate_created_on
 from api.validations.valid import validate_intervention_incident_id
 from api.models.incident import interventions_list
 from api import app
@@ -30,12 +30,16 @@ def post_intervention():
     check_location(location)
     
     validate_status(status)
-     
+
     validate_images(images)
     
     check_videos(videos)
     
     check_comment(comment)
+
+    validate_incident_type(incident_type)
+
+    validate_created_on(created_on)
 
     interventions = Incidents(incident_id,created_on,created_by,incident_type,location,
                               status,images,videos,comment)

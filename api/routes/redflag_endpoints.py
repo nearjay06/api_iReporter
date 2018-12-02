@@ -3,8 +3,9 @@ from api.models.incident import Incidents,Redflags
 from api.controllers.control import edit_location,edit_comment,delete_redflag,get_specific_redflag
 import json
 from api.validations.valid import validate_status, check_created_by,check_location,check_comment
-from api.validations.valid import check_videos,validate_images,validate_redflag_location_with_id
-from api.validations.valid import validate_incident_id
+from api.validations.valid import check_videos,validate_images
+from api.validations.valid import validate_redflag_location_with_id
+from api.validations.valid import validate_incident_id,validate_incident_type,validate_created_on
 from api.models.incident import redflags_list
 from api import app
 
@@ -38,8 +39,13 @@ def post_redflag_records():
     
     check_comment(comment)
 
+    validate_incident_type(incident_type)
 
-    redflags = Incidents(incident_id,created_on,created_by,incident_type,location,status,images,videos,comment)
+    validate_created_on(created_on)
+
+
+    redflags = Incidents(incident_id,created_on,created_by,incident_type,location,
+                         status,images,videos,comment)
     redflags_list.append(redflags.to_dict_redflag())
     return jsonify({
          'status': 201,
