@@ -22,6 +22,7 @@ class TestEndpoints(unittest.TestCase):
             "phone_number": "abcdefg",
             "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
             "user_id": 3,
+            "password":"lalaland",
             "username": "trickster"
         }
 
@@ -39,6 +40,7 @@ class TestEndpoints(unittest.TestCase):
             "phone_number": "abcdefg",
             "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
             "user_id": 3,
+            "password":"lalaland",
             "username": "trickster"
             
             }
@@ -47,7 +49,7 @@ class TestEndpoints(unittest.TestCase):
                                   data = json.dumps(items))
         self.assertEqual(response.status_code,200)
         self.assertTrue({'user id is required and it should be an integer','message'},True)
-        self.assertEqual(len(items),9)
+        self.assertEqual(len(items),10)
 
     
     def test_get_user_with_id(self):
@@ -60,6 +62,7 @@ class TestEndpoints(unittest.TestCase):
             "phone_number": "abcdefg",
             "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
             "user_id": 3,
+            "password":"lalaland",
             "username": "trickster"
             
             }
@@ -79,6 +82,7 @@ class TestEndpoints(unittest.TestCase):
             "phone_number": "abcdefg",
             "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
             "user_id": 3,
+            "password":"lalaland",
             "username": "trickster"
             
             }
@@ -105,6 +109,7 @@ class TestEndpoints(unittest.TestCase):
             "phone_number": "abcdefg",
             "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
             "user_id": 3,
+            "password":"lalaland",
             "username": "trickster"
             
             }
@@ -130,6 +135,7 @@ class TestEndpoints(unittest.TestCase):
             "phone_number": "abcdefg",
             "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
             "user_id": 3,
+            "password":"lalaland",
             "username": "trickster"
             
             }
