@@ -4,7 +4,7 @@ user_list = []
 
 class Users:
     def __init__(self, user_id, first_name, last_name, other_names, email, phone_number, username,
-                 registered,isAdmin):
+                 password,registered,isAdmin):
       self.user_id = user_id
       self.first_name = first_name
       self.last_name = last_name
@@ -12,6 +12,7 @@ class Users:
       self.email = email
       self.phone_number = phone_number
       self.username = username
+      self.password = password
       self.registered = datetime.datetime.now()
       self.isAdmin = isAdmin
 
@@ -25,6 +26,7 @@ class Users:
              "email":self.email,
              "phone_number":self.phone_number,
              "username":self.username,
+             "password":self.password,
              "registered":self.registered,
              "isAdmin":self.isAdmin
         }

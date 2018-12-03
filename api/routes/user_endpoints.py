@@ -6,7 +6,7 @@ from api.controllers.user_control import check_email_user_id,delete_user
 import json
 from api.validations.user_valid import validate_first_name,validate_last_name,validate_email
 from api.validations.user_valid import validate_username,validate_other_names,validate_phone_number
-from api.validations.user_valid import check_user_id,validate_registered 
+from api.validations.user_valid import check_user_id,validate_registered,validate_password
 from api.models.user import user_list
 from api import app
 
@@ -22,6 +22,7 @@ def post_user_record():
     email = use.get('email')
     phone_number = use.get('phone_number')
     username = use.get('username')
+    password = use.get('password')
     registered = use.get('registered')
     isAdmin = use.get('isAdmin')
 
@@ -33,6 +34,8 @@ def post_user_record():
 
     validate_username(username)
 
+    validate_password(password)
+
     validate_registered(registered)
 
     validate_other_names(other_names)
@@ -40,7 +43,7 @@ def post_user_record():
     validate_phone_number(phone_number)
 
     users = Users(user_id, first_name, last_name, other_names, email, phone_number,
-                  username, registered,isAdmin)
+                  username,password, registered,isAdmin)
     user_list.append(users.user_dict())
     return jsonify({
                     'status': 201,

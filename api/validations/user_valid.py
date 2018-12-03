@@ -13,6 +13,13 @@ def validate_email(email):
     if not email or not isinstance (email,int) or email.isspace():
         return jsonify({'message':'please provide an email'}),401
 
+def validate_password(password):
+    if not password or password.isspace() or not isinstance(password,str) or len(password) > 10:
+        return jsonify ({'message':'invalid! password can only be up to 10 characters'}),403
+
+
+
+
 def validate_username(username):
     if not username or username.isspace() or isinstance(username,int):
         return jsonify({'message':'sorry!please provide username and it should be a string'}),400
