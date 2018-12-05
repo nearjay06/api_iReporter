@@ -52,6 +52,7 @@ pytest-cov==2.6.0
 python-dotenv==0.9.1
 pytz==2018.5
 regex==2018.8.29
+report==0.0.1
 requests==2.20.1
 scandir==1.9.0
 singledispatch==3.4.0.3

@@ -1,13 +1,14 @@
 from flask import jsonify
 
 
+
 def validate_status(status):
     if status.isspace() or not status or not isinstance(status,str):
         return jsonify ({'message':'status is not in the list'}),400
 
 def check_created_by(created_by):
-    if not created_by or not isinstance(created_by,int) or created_by.isspace():
-        return jsonify({'message':'createdby should  be a string'}),400
+    if not created_by or not isinstance(created_by,str) or created_by.isspace():
+        return jsonify({'message':'createdby should be a string'}),400
   
 def check_location(location):
     if not location or location.isspace():
@@ -25,9 +26,6 @@ def validate_incident_type(incident_type):
     if not incident_type or isinstance(incident_type,int) or incident_type.isspace():
         return jsonify({'message':'incident type is required and should be a string'}),400
 
-def validate_created_on(created_on):
-    if not created_on or isinstance(created_on,int) or created_on.isspace():
-        return jsonify({'message':'date is required and should be a string'}),400
 
 def validate_images(images):
     if not images or len(images) == 0 or not isinstance(images,str) or images.isspace():

@@ -14,7 +14,7 @@ class TestEndpoints(unittest.TestCase):
         
     def test_get_all_redflag_records(self):
         data = {
-                 "incident_id": 1,
+                "incident_id": 1,
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
                 "created_by": "rth",
                 "incident_type":"redflag",

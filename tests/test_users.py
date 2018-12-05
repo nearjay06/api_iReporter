@@ -144,8 +144,62 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.delete('/api/v1/users/1')
         self.assertEqual(response.status_code,200)
         
-        
+    def test_get_all_admins(self):
+        items ={
+            "email": "jo@gmail.com",
+            "first_name": "dadadad",
+            "isAdmin": "true",
+            "last_name": "ann",
+            "other_names": "lala",
+            "phone_number": "efg",
+            "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
+            "user_id": 2,
+            "password":"lalaland",
+            "username": "play"
+        }
 
+        self.app.post('/api/v1/users/admins', content_type= 'application/json', data = json.dumps(items))
+        response = self.app.get('/api/v1/users/admins')
+        self.assertEqual(response.status_code,200)
+        
+    def test_post_admin_record(self):
+        items={
+              "first_name":"ytyty",
+              "last_name":"yuyuy",
+              "admin_othernames":"yuyu",
+              "admin_email":"hhh@gmail.com",
+              "admin_phonenumber":"kiii",
+              "admin_username":"poi",
+              "admin_password":"opm",
+              "registered": "Wed, 05 Dec 2018 15:33:01 GMT",
+              "user_id": 1,
+              "isAdmin": "true"
+            }
+
+        response = self.app.post('/api/v1/users/admins', content_type= 'application/json',
+                                  data = json.dumps(items))
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(len(items),10)
+       
+    def test_get_admin_with_id(self):
+        items={
+             "email": "jo@gmail.com",
+             "first_name": "dadadad",
+             "isAdmin": "true",
+             "last_name": "ann",
+             "other_names": "lala",
+             "phone_number": "efg",
+             "registered": "Thu, 29 Nov 2018 16:38:07 GMT",
+             "user_id": 2,
+             "password":"lalaland",
+             "username": "play"
+                        
+            }
+
+        self.app.post('/api/v1/users/admins', content_type= 'application/json',data = json.dumps(items))
+        response = self.app.get('/api/v1/users/1/admins')
+        self.assertEqual(response.status_code,200)
+        self.assertIsInstance(items,dict)
 
 
 
