@@ -4,13 +4,12 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/db3adc0af34643761152/maintainability)](https://codeclimate.com/github/nearjay06/api_iReporter/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/db3adc0af34643761152/test_coverage)](https://codeclimate.com/github/nearjay06/api_iReporter/test_coverage)
 
-IREPORTER
+# IREPORTER
 
 iReporter is a platform that enables citizens to report incidences of corruption to local authorities and also bring to attention issues that require government intervention.Users can use the platform to create red-flag records,get all red-flag records,get specific red-flag records,edit specific red-flag records and delete red-flag records.
 
-GETTING STARTED
+## GETTING STARTED
 
 - On your computer or laptop, download and install the VS source code editor
 - Create a folder on your computer or laptop and give it the "iReporter project" name
@@ -18,7 +17,7 @@ GETTING STARTED
 - In a web browser such as Google chrome,create a git hub repository
 - Use the Vs source code editor, to initializing your git hub repo i.e $git init
 
-PREREQUSITES
+## PREREQUSITES
 
 - Use a pivotal tracker board to manage the project
 - Download and install python3 and postman on your laptop or computer. Postman is an HTTP client
@@ -29,31 +28,42 @@ PREREQUSITES
 - Get coveralls and code climate badges
 - Host it on Heroku
 
-RUNNING THE PROJECT
+## RUNNING THE PROJECT
 
 - Run the project code in the VS code editor by typing,"python run.py"
 
-ENDPOINTS
-- Create a red -flag record i.e POST/red-flags
-- Get all red-flag records i.e GET/red-flags
-- Get a specific red-flag record i.e GET/red-flags/red-flag-id
-- Edit a specific red-flag record i.e PATCH/red-flags/red-flag-id/location
-- Delete a red-flag record i.e DELETE/red-flags/red-flag-id
+## ENDPOINTS
 
-BUILT WITH
+| URL Endpoint | HTTP Methods | Summary |
+| -------- | ------------- | --------- |
+| `api/v1/red-flags` | `POST`  | Creates a new red-flag|
+| `api/v1/red-flags` | `GET`  | Gets red-flag records|
+| `api/v1/red-flags/<int:incident-id>` | `GET` | Retrieves a specific red-flag| 
+| `api/v1/red-flags/<int:incident-id>/location` | `PATCH` | Update a redflag location|
+| `api/v1/red-flags/<int:incident-id>/comment` | `PATCH` | Update a red-flag comment |
+| `api/v1/red-flags/<int:incident-id>` | `DELETE`  | Delete a red-flag|
+| `api/v1/interventions` | `POST`  | Creates a new intervention|
+| `api/v1/interventions` | `GET`  | Gets interventions records|
+| `api/v1/interventions/<int:incident-id>` | `GET`  | Gets a specific intervention|
+ | `api/v1/interventions/<int:incident-id>/location` | `PATCH`  | Updates intervention location |
+| `api/v1/interventions/<int:incident-id>/comment` | `PATCH`  | Upadtes intervention comment|
+| `api/v1/interventions` | `DELETE`  | Deletes and intervention record|
+| `api/v1/users` | `POST`  | Creates a new user|
+| `api/v1/users` | `GET`  | Gets all users|
+| `api/v1/users/<int:user-id>` | `GET`  | Gets specific user record|
+| `api/v1/users` | `DELETE`  | Deletes a user record|
+
+
+## BUILT WITH
 
 - python3
 - flask
 
-LICENSE
-
-Andela-Uganda
-
-AUTHOR
+## AUTHOR
 
 Okecho Joan
 
-ACKNOWLEDGEMENTS
+## ACKNOWLEDGEMENTS
 
 Andela-Uganda
 
