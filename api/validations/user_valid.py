@@ -21,7 +21,6 @@ def validate_username(username):
     if not username or username.isspace() or not isinstance(username,str):
         return jsonify({'message':'sorry!please provide username and it should be a string'}),400
 
-    
 def validate_other_names(other_names):
     if not other_names or other_names.isspace() or not isinstance(other_names,str):
         return jsonify({'message':'sorry!please provide othernames'}),400
