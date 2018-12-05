@@ -32,3 +32,17 @@ class Users:
         }
 
       return users
+
+class Admin(Users):
+    def __init__(self, user_id,first_name,last_name, admin_othernames,admin_email,
+                 admin_phonenumber, admin_username, admin_password,registered,isAdmin):
+      self.user_id = len(user_list)+1
+      self.first_name = first_name
+      self.last_name = last_name
+      self.other_names = admin_othernames
+      self.email = admin_email
+      self.phone_number = admin_phonenumber
+      self.username = admin_username
+      self.password = admin_password
+      self.registered = datetime.datetime.now()
+      self.isAdmin = isAdmin

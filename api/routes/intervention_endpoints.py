@@ -3,7 +3,7 @@ from api.models.incident import Incidents,Interventions
 from api.controllers.control import edit_intervention_location,edit_intervention_comment
 from api.controllers.control import delete_intervention,get_specific_intervention
 from api.validations.valid import validate_status, check_created_by,check_location,check_comment
-from api.validations.valid import check_videos,validate_images,validate_incident_type,validate_created_on
+from api.validations.valid import check_videos,validate_images,validate_incident_type
 from api.validations.valid import validate_intervention_incident_id
 from api.models.incident import interventions_list
 from api import app
@@ -24,23 +24,28 @@ def post_intervention():
     videos = data.get('videos')
     comment = data.get('comment')
 
+    if check_created_by(created_by):
+      return check_created_by(created_by)
+
+    if check_location(location):
+      return check_location(location)
     
-    check_created_by(created_by)
+    if validate_status(status):
+      return validate_status(status)
 
-    check_location(location)
+    if validate_images(images):
+      return validate_images(images)
     
-    validate_status(status)
-
-    validate_images(images)
+    if check_videos(videos):
+      return check_videos(videos)
     
-    check_videos(videos)
+    if check_comment(comment):
+      return check_comment(comment)
+
+    if validate_incident_type(incident_type):
+      return validate_incident_type(incident_type)
+
     
-    check_comment(comment)
-
-    validate_incident_type(incident_type)
-
-    validate_created_on(created_on)
-
     interventions = Incidents(incident_id,created_on,created_by,incident_type,location,
                               status,images,videos,comment)
     interventions_list.append(interventions.to_dict_intervention())
