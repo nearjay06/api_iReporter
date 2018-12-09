@@ -11,7 +11,7 @@ from api import app
 import json
 
 @app.route('/api/v1/interventions',methods=['POST'])
-def post_intervention():
+def create_intervention():
     data = request.get_json()
 
     incident_id = len(interventions_list)+1

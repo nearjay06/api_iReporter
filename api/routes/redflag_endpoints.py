@@ -15,7 +15,7 @@ def reporting():
     return 'Welcome to iREPORTER'
 
 @app.route('/api/v1/redflags',methods=['POST'])
-def post_redflag_records():
+def report_redflag():
     request_data = request.get_json()
     incident_id = len(redflags_list)+1
     created_on = request_data.get('created_on')
