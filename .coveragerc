@@ -8,3 +8,6 @@ omit =
     */home/travis/virtualenv/*
     */.pytest_cache/*
     */.vscode/*
+    api/validations/*
+    api/models/*
+    api/controllers/*
