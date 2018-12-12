@@ -3,6 +3,8 @@ import datetime
 user_list = []
 
 class Users:
+    user_list = []
+
     def __init__(self, user_id, first_name, last_name, other_names, email, phone_number, username,
                  password,registered,isAdmin):
       self.user_id = user_id
@@ -46,3 +48,5 @@ class Admin(Users):
       self.password = admin_password
       self.registered = datetime.datetime.now()
       self.isAdmin = isAdmin
+
+

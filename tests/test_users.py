@@ -16,7 +16,7 @@ class TestEndpoints(unittest.TestCase):
         items={
             "email": "joan@gmail.com",
             "first_name": "dalai",
-            "isAdmin": "false",
+            "isAdmin": False,
             "last_name": "ann",
             "other_names": "mermaid",
             "phone_number": "abcdefg",
@@ -26,15 +26,15 @@ class TestEndpoints(unittest.TestCase):
             "username": "trickster"
         }
 
-        self.app.post('/api/v1/users', content_type= 'application/json', data = json.dumps(items))
+        self.app.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(items))
         response = self.app.get('/api/v1/users')
         self.assertEqual(response.status_code,200)
         
-    def test_post_user_record(self):
+    def test_user_signup(self):
         items={
             "email": "joan@gmail.com",
             "first_name": "dalai",
-            "isAdmin": "false",
+            "isAdmin": False,
             "last_name": "ann",
             "other_names": "mermaid",
             "phone_number": "abcdefg",
@@ -45,18 +45,34 @@ class TestEndpoints(unittest.TestCase):
             
             }
 
-        response = self.app.post('/api/v1/users', content_type= 'application/json',
+        response = self.app.post('/api/v1/users/signup', content_type= 'application/json',
                                   data = json.dumps(items))
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code,201)
         self.assertTrue({'user id is required and it should be an integer','message'},True)
         self.assertEqual(len(items),10)
 
+    def test_user_signin(self):
+        items={
+            "email": "joan@gmail.com",
+            "password":"lalaland",
+            "username": "trickster"
+                       
+            }
+
+        response = self.app.post('/api/v1/users/signin', content_type= 'application/json',
+                                  data = json.dumps(items))
+        self.assertEqual(response.status_code,201)
+        self.assertTrue({'created user','message'},True)
+           
+       
+    
+    
     
     def test_get_user_with_id(self):
         items={
             "email": "joan@gmail.com",
             "first_name": "dalai",
-            "isAdmin": "false",
+            "isAdmin": False,
             "last_name": "ann",
             "other_names": "mermaid",
             "phone_number": "abcdefg",
@@ -67,7 +83,7 @@ class TestEndpoints(unittest.TestCase):
             
             }
 
-        self.app.post('/api/v1/users', content_type= 'application/json',data = json.dumps(items))
+        self.app.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(items))
         response = self.app.get('/api/v1/users/1')
         self.assertEqual(response.status_code,200)
         self.assertIsInstance(items,dict)
@@ -76,7 +92,7 @@ class TestEndpoints(unittest.TestCase):
         items={
             "email": "joan@gmail.com",
             "first_name": "dalai",
-            "isAdmin": "false",
+            "isAdmin": False,
             "last_name": "ann",
             "other_names": "mermaid",
             "phone_number": "abcdefg",
@@ -92,7 +108,7 @@ class TestEndpoints(unittest.TestCase):
                                "phone_number":"abcdefg"
                            }
 
-        self.app.post('/api/v1/users', content_type= 'application/json',data = json.dumps(items))
+        self.app.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(items))
         response = self.app.patch('/api/v1/users/1/phone_number',
                           content_type= 'application/json',data = json.dumps(change_phone_number))
         self.assertEqual(response.status_code,200)
@@ -103,7 +119,7 @@ class TestEndpoints(unittest.TestCase):
         items={
             "email": "joan@gmail.com",
             "first_name": "dalai",
-            "isAdmin": "false",
+            "isAdmin": False,
             "last_name": "ann",
             "other_names": "mermaid",
             "phone_number": "abcdefg",
@@ -118,7 +134,7 @@ class TestEndpoints(unittest.TestCase):
                         "email": "new_email@gmail.com"
                        }
 
-        self.app.post('/api/v1/users', content_type= 'application/json',data = json.dumps(items))
+        self.app.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(items))
         response = self.app.patch('/api/v1/users/1/email',content_type= 'application/json', 
                                    data = json.dumps(change_email))
         res = json.loads(response.data.decode())
@@ -129,7 +145,7 @@ class TestEndpoints(unittest.TestCase):
         items={
             "email": "joan@gmail.com",
             "first_name": "dalai",
-            "isAdmin": "false",
+            "isAdmin": False,
             "last_name": "ann",
             "other_names": "mermaid",
             "phone_number": "abcdefg",
@@ -140,7 +156,7 @@ class TestEndpoints(unittest.TestCase):
             
             }
 
-        self.app.post('/api/v1/users', content_type= 'application/json', data = json.dumps(items))
+        self.app.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(items))
         response = self.app.delete('/api/v1/users/1')
         self.assertEqual(response.status_code,200)
         
