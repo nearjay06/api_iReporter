@@ -1,6 +1,6 @@
 from flask import jsonify,request
 from api.models.user import Users,user_list
-from api.validations import user_valid
+from api.validations.user_valid import *
 from api.validations.user_valid import certify_phone_number_with_user_id
 from api.validations.user_valid import validate_first_name,validate_last_name,validate_email
 from api.validations.user_valid import validate_username,validate_other_names,validate_phone_number
@@ -33,8 +33,8 @@ def client(reserve):
     return validate_isAdmin(reserve.isAdmin)
      
   if isinstance(reserve, Users):
-    Users.user_list.append(reserve.user_dict())
-    print(Users.user_list)
+    user_list.append(reserve.user_dict())
+    print(user_list)
     return True
 
 
@@ -52,7 +52,7 @@ def login(username,password):
 def check_phone_number_user_id(user_id):
   use = request.get_json()
   phone_number = use.get('phone_number')
-  for user in Users.user_list:
+  for user in user_list:
     if user['user_id'] == user_id:
       user['phone_number'] = phone_number
       return jsonify({
@@ -65,7 +65,7 @@ def check_phone_number_user_id(user_id):
 def check_email_user_id(user_id):
   use = request.get_json()
   email = use.get('email')
-  for user in Users.user_list:
+  for user in user_list:
     if user['user_id'] == user_id:
       user['email'] = email
       return jsonify({
@@ -76,10 +76,10 @@ def check_email_user_id(user_id):
   
 
 def delete_user(user_id):
-  user = [user for user in Users.user_list if user['user_id'] == user_id ]
+  user = [user for user in user_list if user['user_id'] == user_id ]
   if len(user) == 0:
     return jsonify({'message':'user is not in the list'}),400
-  Users.user_list.remove(user[0])
+  user_list.remove(user[0])
   return jsonify({
                    'status': 200,
                    'data':user,
@@ -87,7 +87,7 @@ def delete_user(user_id):
 
  
 def get_specific_user(user_id):
-  for user in Users.user_list:
+  for user in user_list:
     if user['user_id'] == user_id:
              return jsonify({'status': 200,
                              'data':user})

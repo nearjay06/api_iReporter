@@ -13,7 +13,7 @@ class TestEndpoints(unittest.TestCase):
     def test_get_all_interventions(self):
         data = {
                  "comment": "blaj",
-                 "created_by": "tatatat",
+                 "created_by": 456,
                  "created_on": "Thu, 29 Nov 2018 14:34:43 GMT",
                  "images": "https://www.monitor.co.ug/News/National/688334-1286590-a2a4psz/index.html",
                  "incident_id": 2,
@@ -33,7 +33,7 @@ class TestEndpoints(unittest.TestCase):
     def test_post_intervention_records(self):
         data = {
               "comment": "blaj",
-              "created_by": "tatatat",
+              "created_by": 789,
               "created_on": "Thu, 29 Nov 2018 14:34:43 GMT",
               "images": "https://www.monitor.co.ug/News/National/688334-1286590-a2a4psz/index.html",
               "incident_id": 2,
@@ -54,7 +54,7 @@ class TestEndpoints(unittest.TestCase):
     def test_get_specific_intervention_with_id(self):
         data = {
             "comment": "blaj",
-            "created_by": "tatatat",
+            "created_by": 678,
             "created_on": "Thu, 29 Nov 2018 14:34:43 GMT",
             "images": "https://www.monitor.co.ug/News/National/688334-1286590-a2a4psz/index.html",
             "incident_id": 2,
@@ -73,7 +73,7 @@ class TestEndpoints(unittest.TestCase):
     def test_update_intervention_record_location_with_id(self):
         data = {
             "comment": "blaj",
-            "created_by": "tatatat",
+            "created_by": 6789,
             "created_on": "Thu, 29 Nov 2018 14:34:43 GMT",
             "images": "https://www.monitor.co.ug/News/National/688334-1286590-a2a4psz/index.html",
             "incident_id": 2,
@@ -98,7 +98,7 @@ class TestEndpoints(unittest.TestCase):
     def test_update_intervention_comment_with_id(self):
         data = {
                  "comment": "blaj",
-                 "created_by": "tatatat",
+                 "created_by": 456,
                  "created_on": "Thu, 29 Nov 2018 14:34:43 GMT",
                  "images": "https://www.monitor.co.ug/News/National/688334-1286590-a2a4psz/index.html",
                  "incident_id": 2,
@@ -124,7 +124,7 @@ class TestEndpoints(unittest.TestCase):
     def test_delete_specific_intervention_with_id(self):
         data = {
             "comment": "blaj",
-            "created_by": "tatatat",
+            "created_by": 678,
             "created_on": "Thu, 29 Nov 2018 14:34:43 GMT",
             "images": "https://www.monitor.co.ug/News/National/688334-1286590-a2a4psz/index.html",
             "incident_id": 2,

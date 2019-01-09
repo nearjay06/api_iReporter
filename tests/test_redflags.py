@@ -16,7 +16,7 @@ class TestEndpoints(unittest.TestCase):
         data = {
                 "incident_id": 1,
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
-                "created_by": "rth",
+                "created_by": 123,
                 "incident_type":"redflag",
                 "location":"dsdsds",
                 "status": "under investigation",
@@ -39,7 +39,7 @@ class TestEndpoints(unittest.TestCase):
         data = {
                 "incident_id": 1,
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
-                "created_by": "rth",
+                "created_by": 456,
                 "incident_type":"redflag",
                 "location":"dsdsds",
                 "status": "under investigation",
@@ -60,7 +60,7 @@ class TestEndpoints(unittest.TestCase):
         data = {
                 "incident_id": 1,
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
-                "created_by": "rth",
+                "created_by": 567,
                 "incident_type":"redflag",
                 "location":"dsdsds",
                 "status": "under investigation",
@@ -82,7 +82,7 @@ class TestEndpoints(unittest.TestCase):
         data = {
                 "incident_id": 1,
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
-                "created_by": "rth",
+                "created_by": 456,
                 "incident_type":"redflag",
                 "location":"dsdsds",
                 "status": "under investigation",
@@ -107,7 +107,7 @@ class TestEndpoints(unittest.TestCase):
         data = {
                 "incident_id": 1,
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
-                "created_by": "rth",
+                "created_by": 567,
                 "incident_type":"redflag",
                 "location":"dsdsds",
                 "status": "under investigation",
@@ -134,7 +134,7 @@ class TestEndpoints(unittest.TestCase):
         data = {
                 "incident_id": 1,
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
-                "created_by": "rth",
+                "created_by": 456,
                 "incident_type":"redflag",
                 "location":"dsdsds",
                 "status": "under investigation",

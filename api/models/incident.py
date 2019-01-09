@@ -1,11 +1,9 @@
 import datetime
 
-
 redflags_list = []
 interventions_list = []
 class Incidents():
-    redflags_list = []
-    interventions_list = []
+    
     def __init__(self,incident_id,created_on,created_by,incident_type,location,status,
                  images,videos,comment):
       self.incident_id = incident_id

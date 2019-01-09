@@ -1,15 +1,19 @@
 from flask import Flask, jsonify, request
+from flask_jwt import JWT,jwt_required
 from api.models.incident import Incidents,Interventions,interventions_list
-from api.controllers import control 
+from api.controllers import control
 from api.validations import valid
 from api import app
 import json
+from api.secure.safe import *
 
+
+@jwt_required
 @app.route('/api/v1/interventions',methods=['POST'])
 def create_intervention():
     data = request.get_json()
 
-    incident_id = len(Incidents.interventions_list)+1
+    incident_id = len(interventions_list)+1
     created_on = data.get('created_on')
     created_by = data.get('created_by')
     incident_type = data.get('incident_type')
@@ -27,31 +31,32 @@ def create_intervention():
       return control.save(interventions)
     return jsonify({
                       'status': 200,
-                      'data': Incidents.interventions_list,
+                      'data': interventions_list,
                       'message': 'Created intervention record'
                 }),200
 
-
+@jwt_required
 @app.route('/api/v1/interventions',methods=['GET'])
 def get_all_intervention_records():
   return jsonify({'status': 200,
-                  'data': Incidents.interventions_list}),200
+                  'data': interventions_list}),200
    
-
+@jwt_required
 @app.route('/api/v1/interventions/<int:incident_id>',methods=['GET'])
 def get_specific_intervention_record_with_id(incident_id):
   return control.get_specific_intervention(incident_id)
 
-
+@jwt_required
 @app.route('/api/v1/interventions/<int:incident_id>/location',methods=['PATCH'])
 def update_intervention_record_location_with_id(incident_id):
   return control.edit_intervention_location(incident_id)
   
-
+@jwt_required
 @app.route('/api/v1/interventions/<int:incident_id>/comment',methods=['PATCH'])
 def update_intervention_comment_with_id(incident_id):
   return control.edit_intervention_comment(incident_id)
-  
+
+@jwt_required 
 @app.route('/api/v1/interventions/<int:incident_id>', methods=['DELETE'])
 def delete_specific_intervention_with_id(incident_id):
   return control.delete_intervention(incident_id)
