@@ -96,7 +96,7 @@ class TestEndpoints(unittest.TestCase):
                           }
         
         self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
-        response = self.app.patch('/api/v1/redflags/2/location', content_type= 'application/json', 
+        response = self.app.patch('/api/v1/redflags/1/location', content_type= 'application/json', 
                                    data = json.dumps(change_location))
         res = json.loads(response.data.decode())
         self.assertEqual(response.status_code,200)
@@ -123,7 +123,7 @@ class TestEndpoints(unittest.TestCase):
 
          
         self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
-        response = self.app.patch('/api/v1/redflags/2/comment',content_type= 'application/json',
+        response = self.app.patch('/api/v1/redflags/1/comment',content_type= 'application/json',
                                   data = json.dumps(edited_data))
         res = json.loads(response.data.decode())
         self.assertEqual(response.status_code,200)
