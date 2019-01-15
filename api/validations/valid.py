@@ -29,7 +29,7 @@ def check_videos(videos):
     return True
 
 def validate_incident_type(incident_type):
-    if not incident_type or isinstance(incident_type,int) or incident_type.isspace():
+    if not incident_type or not isinstance(incident_type,str) or incident_type.isspace():
         return jsonify({'message':'incident type is required and should be a string'}),400
     return True
 

@@ -53,7 +53,9 @@ class TestEndpoints(unittest.TestCase):
 
     def test_user_signin(self):
         items={
-            "email": "joan@gmail.com",
+            "email"
+            
+            : "joan@gmail.com",
             "password":"lalaland",
             "username": "trickster"
                        

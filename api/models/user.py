@@ -4,7 +4,7 @@ user_list = []
 class Users:
     
     def __init__(self, user_id, first_name, last_name, other_names, email, phone_number, username,
-                 password,registered,isAdmin):
+                 password,registered):
       self.user_id = user_id
       self.first_name = first_name
       self.last_name = last_name
@@ -14,7 +14,7 @@ class Users:
       self.username = username
       self.password = password
       self.registered = datetime.datetime.now()
-      self.isAdmin = isAdmin
+      self.isAdmin = False
  
     def user_dict(self):
       users = {
@@ -31,18 +31,26 @@ class Users:
         }
 
       return users
+
+def admin_access():
+  for user in user_list:
+    if user.isAdmin:
+      return True
+
+
 class Admin(Users):
-    def __init__(self, user_id,first_name,last_name, admin_othernames,admin_email,
-                 admin_phonenumber, admin_username, admin_password,registered,isAdmin):
-      self.user_id = len(user_list)+1
-      self.first_name = first_name
-      self.last_name = last_name
-      self.other_names = admin_othernames
-      self.email = admin_email
-      self.phone_number = admin_phonenumber
-      self.username = admin_username
-      self.password = admin_password
-      self.registered = datetime.datetime.now()
-      self.isAdmin = isAdmin
+    def __init__(self, user_id,first_name,last_name, othernames,email,
+                 phonenumber, username, password,registered):
+      Users.__init__(self, user_id,first_name,last_name, othernames,email,
+                 phonenumber, username, password,registered)
+      self.isAdmin = True
+
+    
+    
 
 
+if __name__=='__main__':
+  joan=Admin(7,'joan','whitre','abs','joan@gmail.com','abcgd','joan','14462681','14/01/2019')
+  tom=Users(7,'joan','whitre','abs','joan@gmail.com','abcgd','joan','14462681','14/01/2019')
+  print(joan.isAdmin)
+  print(tom.isAdmin)

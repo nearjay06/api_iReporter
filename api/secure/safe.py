@@ -1,7 +1,6 @@
 from werkzeug.security import safe_str_cmp
 from api.models.user import Users, user_list
 from flask import Flask,jsonify,request
-from flask_jwt import JWT,jwt_required
 from functools import wraps
 import jwt
 import datetime
@@ -28,6 +27,15 @@ def encode_token(user_id):
         print(e)
         raise e
 
+def get_token():
+    if not 'Authorization' in request.headers:
+        return jsonify ({'message':'token is missing'}),401
+        
+    token=request.headers['Authorization']
+    if not token:
+        return jsonify({"message":"Please login first"}),401
+    return token
+
 def decode_token(token):
     try:
         payload = jwt.decode(token,app.config['SECRET_KEY'])
@@ -39,59 +47,61 @@ def decode_token(token):
 
 def token_required(f):
     @wraps(f)
-    # token = jwt.header['payload']
     def decorated(*args, **kwargs):
-        token = request.args.get('token')
+        token = get_token()
+
+        print(token)
 
         if not token:
             return jsonify ({'message':'token is missing'}),401
         
         try:
             data = jwt.decode(token,app.config['SECRET_KEY'])
+            username=data.get('username')
         except:
             return jsonify({'message':'invalid token'}),401
 
-        return f(*args, **kwargs)
+        return f(username,*args, **kwargs)
     return decorated
 
 
-def present_user(req):
-    token = req.headers('token')
-    decode_token = decode_token('token')
+# def present_user(req):
+#     token = req.headers('token')
+#     decode_token = decode_token('token')
 
-    if token:
-        try:
-            user_id = int(decode_token['user_id'])
-            users = Users.user_dict.first()
+#     if token:
+#         try:
+#             user_id = int(decode_token['user_id'])
+#             users = Users.user_dict.first()
 
-            for user in users:
-                if user['user_id']== user_id:
-                    return user
-            else:
-                return False
-        except jwt.ExpiredSignatureError:
-            return False
-    else:
-        return False 
+#             for user in users:
+#                 if user['user_id']== user_id:
+#                     return user
+#             else:
+#                 return False
+#         except jwt.ExpiredSignatureError:
+#             return False
+#     else:
+#         return False 
 
 
-def admin_token(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        isAdmin = present_user()['isAdmin']
-        if isAdmin:
-            return f(*args, **kwargs)
-        return jsonify({"message": "Access granted to admin only"}), 403
-    return wrap
+# def admin_token(f):
+#     @wraps(f)
+#     def wrap(*args, **kwargs):
+#         isAdmin = present_user()['isAdmin']
+#         if isAdmin:
+#             return f(*args, **kwargs)
+#         return jsonify({"message": "Access granted to admin only"}), 403
+#     return wrap
   
-def not_admin_token(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        isAdmin = present_user()['isAdmin']
-        if not isAdmin:
-            return jsonify({"messsage": "Access for non admin only"}), 403
-        return f(*args, **kwargs)
-    return wrap
+# def not_admin_token(f):
+#     @wraps(f)
+#     def wrap(*args, **kwargs):
+#         isAdmin = present_user()['isAdmin']
+#         if not isAdmin:
+#             return jsonify({"messsage": "Access for non admin only"}), 403
+#         return f(*args, **kwargs)
+#     return wrap
 
 
 
