@@ -1,5 +1,5 @@
 from flask import jsonify,request
-from api.models.user import Users,user_list
+from api.models.user import Users,user_list,Admin,admin_access
 from api.validations.user_valid import *
 from api.validations.user_valid import certify_phone_number_with_user_id
 from api.validations.user_valid import validate_first_name,validate_last_name,validate_email
@@ -98,4 +98,13 @@ def get_specific_user(user_id):
 #   for user in user_list:
 #     if user.isAdmin is True:
 #       return True
-    
+def get_all_users():
+  user = admin_access()
+  if user:
+    view_users = []
+    for user in user_list:
+      view_users.append(user.user_dict())
+      return jsonify({'status': 200,
+                    'data': view_users}),200
+  else:
+    return jsonify ({'message':'Access is only for the Admin'})

@@ -92,7 +92,7 @@ iReporter is a platform that enables citizens to report incidences of corruption
     "message": "Created user",
     "status": 201
 
-### Redflag Enpoint Example
+### Redflag Endpoint Example
 
     "data": {
         "comment": "like ",
@@ -120,8 +120,7 @@ iReporter is a platform that enables citizens to report incidences of corruption
         "status": "under investigation",
         "videos": "https://www.youtube.com/watch?v=ZmD_VoCTeCc" },
     "message": "Created intervention record",
-    "status": 200
-}
+    "status": 200 }
 
 ### BUILT WITH
 

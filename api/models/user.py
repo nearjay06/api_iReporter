@@ -47,10 +47,3 @@ class Admin(Users):
 
     
     
-
-
-if __name__=='__main__':
-  joan=Admin(7,'joan','whitre','abs','joan@gmail.com','abcgd','joan','14462681','14/01/2019')
-  tom=Users(7,'joan','whitre','abs','joan@gmail.com','abcgd','joan','14462681','14/01/2019')
-  print(joan.isAdmin)
-  print(tom.isAdmin)

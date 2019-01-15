@@ -27,7 +27,7 @@ def create_intervention():
         
     intervention = Interventions(incident_id,created_on,created_by,incident_type,location,
                               status,images,videos,comment)
-      
+    # interventions_list.append(intervention) 
     if control.save(intervention)!=True:
       return control.save(intervention)
     return jsonify({
