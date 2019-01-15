@@ -1,4 +1,5 @@
 from flask import jsonify
+import re
 
 def validate_first_name(first_name):
     if not first_name or not isinstance(first_name,str) or first_name.isspace():
@@ -11,7 +12,7 @@ def validate_last_name(last_name):
     return True
 
 def validate_email(email):
-    if not email or not isinstance (email,str) or email.isspace():
+    if not email or not isinstance (email,str) or email.isspace() or not re.match(r"[^@.]+@[A-Za-z]+\.[a-z]+", email):
         return jsonify({'message':'please provide an email'}),400
     return True
 

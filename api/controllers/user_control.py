@@ -94,4 +94,8 @@ def get_specific_user(user_id):
   return jsonify({'status':200,
                   'message':'user not found'})
 
+# def admin_access():
+#   for user in user_list:
+#     if user.isAdmin is True:
+#       return True
     
