@@ -24,7 +24,7 @@ def user_signup():
     
     user = Users(user_id, first_name, last_name, other_names, email, phone_number,
                   username,password, registered)
-    user_list.append(user)
+    # user_list.append(user)
     if user_control.client(user)!=True:
       return user_control.client(user)
     return jsonify({
@@ -32,6 +32,7 @@ def user_signup():
                       'data': user.user_dict(),
                       'message': 'Created user'
                 }),201
+
 
 @app.route('/api/v1/admins/signup',methods=['POST'])
 def admin_signup():
@@ -47,17 +48,16 @@ def admin_signup():
     password = use.get('password')
     registered = use.get('registered')
     
-  
-    
+      
     admin = Admin(user_id, first_name, last_name, other_names, email, phone_number,
                   username,password, registered)
-    user_list.append(admin)
+    # user_list.append(admin)
     if user_control.client(admin)!=True:
       return user_control.client(admin)
     return jsonify({
                       'status': 201,
                       'data': admin.user_dict(),
-                      'message': 'Created user'
+                      'message': 'Created admin account'
                 }),201
 
 
@@ -76,21 +76,31 @@ def user_signin():
                       'token': generated_token.decode('utf-8')
                 }),201
 
-
 @app.route('/api/v1/users',methods=['GET'])
 # @token_required
 def get_all_users():
-    # user = admin_access()
-    # if user:
-    #     view_users = []
-    #     for user in user_list:
-    #         view_users.append(user.user_dict())
-
-        return jsonify({'status': 200,
-                    'data': view_users}),200
-    # else:
-    #     return jsonify ({'message':'Access is only for the Admin'})
+    return jsonify({'status': 200,
+                    'data': user_list}),200
     
+# @app.route('/api/v1/users',methods=['GET'])
+# @token_required
+# def get_all_users():
+    # return user_control.get_all_users()
+    #  user = admin_access()
+    # if user:
+    #      view_users = []
+    #      for user in user_list:
+    #          view_users.append(user.user_dict())
+
+    #     return jsonify({'status': 200,
+    #                 'data': view_users}),200
+    #  else:
+    #      return jsonify ({'message':'Access is only for the Admin'})
+    
+
+
+
+
 
 @app.route('/api/v1/users/<int:user_id>',methods=['GET'])
 # @token_required

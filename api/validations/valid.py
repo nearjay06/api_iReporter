@@ -9,7 +9,7 @@ def validate_status(status):
 def check_created_by(created_by):
     # if not created_by or not isinstance(created_by,int) or created_by.isspace():
     if not created_by or not isinstance(created_by,int):  
-        return jsonify({'message':'createdby should be an integer'}),400
+        return jsonify({'message':'createdby field is required and should be an integer'}),400
     return True
   
 def check_location(location):

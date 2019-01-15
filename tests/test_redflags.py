@@ -28,7 +28,7 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.get('/api/v1/redflags')
         self.assertEqual(len(data),9)
         self.assertNotIsInstance('status',Redflags,"message")
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(200,response.status_code)
         self.assertEqual(response.content_type,'application/json')
 
     def test_post_redflag_records(self):
@@ -53,12 +53,12 @@ class TestEndpoints(unittest.TestCase):
                                   data=json.dumps(data)
         
         )
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(200,response.status_code)
         
 
     def test_get_specific_redflag_with_id(self):
         data = {
-                "incident_id": 1,
+                
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
                 "created_by": 567,
                 "incident_type":"redflag",
@@ -71,7 +71,7 @@ class TestEndpoints(unittest.TestCase):
 
         self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
         response = self.app.get('/api/v1/redflags/1')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(200,response.status_code)
         self.assertIsInstance(data,dict)
         
     def test_update_redflag_record_location(self):
@@ -80,7 +80,7 @@ class TestEndpoints(unittest.TestCase):
     
     def test_edit_redflag_record_location(self):
         data = {
-                "incident_id": 1,
+                
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
                 "created_by": 456,
                 "incident_type":"redflag",
@@ -99,13 +99,13 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.patch('/api/v1/redflags/1/location', content_type= 'application/json', 
                                    data = json.dumps(change_location))
         res = json.loads(response.data.decode())
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(200,response.status_code)
               
         
 
     def test_edit_redflag_record_comment(self):
         data = {
-                "incident_id": 1,
+                
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
                 "created_by": 567,
                 "incident_type":"redflag",
@@ -126,13 +126,13 @@ class TestEndpoints(unittest.TestCase):
         response = self.app.patch('/api/v1/redflags/1/comment',content_type= 'application/json',
                                   data = json.dumps(edited_data))
         res = json.loads(response.data.decode())
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(200,response.status_code)
         self.assertIn("updated red-flag record comment", res['message']) 
 
 
     def test_delete_redflag_record_with_id(self):
         data = {
-                "incident_id": 1,
+                
                 "created_on": "Thu, 29 Nov 2018 10:12:28 GMT",
                 "created_by": 456,
                 "incident_type":"redflag",
@@ -144,7 +144,7 @@ class TestEndpoints(unittest.TestCase):
 	            }
         self.app.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(data))
         response = self.app.delete('/api/v1/redflags/1')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(200,response.status_code)
         self.assertEqual(response.content_type,'application/json')
         self.assertIsInstance(data,dict)
 

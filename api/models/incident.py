@@ -54,20 +54,16 @@ class Redflags(Incidents):
                          images,videos,comment):
       Incidents.__init__(self,incident_id,created_on,created_by,incident_type,location,status,
                          images,videos,comment)
-      # self.incident_type = 'redflag'
+    
 
 class Interventions(Incidents):
     def __init__(self,incident_id,created_on,created_by,incident_type,location,status,
                  images,videos,comment):
         Incidents.__init__(self,incident_id,created_on,created_by,incident_type,location,status,
                  images,videos,comment)
-        #self.incident_type = 'intervention'
+        
 
 
-store = Incidents(1,"Tue, 11 Dec 2018 20:07:56 GMT","rth","intervention","kira","rejected",
-                 "http://perilofafrica.com/uk-investors-irked-by-bureaucracy-corruption-in-uganda/","https://www.youtube.com/watch?v=ZmD_VoCTeCc","like comment")
-print(store.created_by)
-print(store.comment)
 
 
 

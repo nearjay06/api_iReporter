@@ -30,6 +30,7 @@ def report_redflag():
     
     redflag = Redflags(incident_id,created_on,created_by,incident_type,location,
                          status,images,videos,comment)
+    # redflags_list.append(redflag)
     if control.save(redflag) !=True:
         return control.save(redflag)
     return jsonify({

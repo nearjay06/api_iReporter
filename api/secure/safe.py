@@ -65,51 +65,6 @@ def token_required(f):
     return decorated
 
 
-# def present_user(req):
-#     token = req.headers('token')
-#     decode_token = decode_token('token')
-
-#     if token:
-#         try:
-#             user_id = int(decode_token['user_id'])
-#             users = Users.user_dict.first()
-
-#             for user in users:
-#                 if user['user_id']== user_id:
-#                     return user
-#             else:
-#                 return False
-#         except jwt.ExpiredSignatureError:
-#             return False
-#     else:
-#         return False 
-
-
-# def admin_token(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         isAdmin = present_user()['isAdmin']
-#         if isAdmin:
-#             return f(*args, **kwargs)
-#         return jsonify({"message": "Access granted to admin only"}), 403
-#     return wrap
-  
-# def not_admin_token(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         isAdmin = present_user()['isAdmin']
-#         if not isAdmin:
-#             return jsonify({"messsage": "Access for non admin only"}), 403
-#         return f(*args, **kwargs)
-#     return wrap
-
-
-
-
-
-
-
-
 
 
 
