@@ -61,7 +61,7 @@ class TestEndpoints(unittest.TestCase):
                           }
         
         self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
-        response = self.test_client.patch('/api/v1/redflags/1/location', content_type= 'application/json', 
+        response = self.test_client.patch('/api/v1/redflags/2/location', content_type= 'application/json', 
                                    data = json.dumps(change_location))
         res = json.loads(response.data.decode())
         self.assertEqual(200,response.status_code)
@@ -74,7 +74,7 @@ class TestEndpoints(unittest.TestCase):
 	            }
          
         self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
-        response = self.test_client.patch('/api/v1/redflags/1/comment',content_type= 'application/json',
+        response = self.test_client.patch('/api/v1/redflags/2/comment',content_type= 'application/json',
                                   data = json.dumps(edited_data))
         res = json.loads(response.data.decode())
         self.assertEqual(200,response.status_code)
@@ -88,14 +88,20 @@ class TestEndpoints(unittest.TestCase):
         self.assertEqual(response.content_type,'application/json')
         self.assertIsInstance(self.redflag,dict)
 
-    def test_post_redflag_error(self):
-        self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
-        response = self.test_client.delete('/api/v1/redflags/1')
+    # def test_post_redflag_error(self):
+
+    #    response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+    #    self.assertEqual(400,response.status_code)
+
+    def test_empty_status_error(self):
+        self.redflag["status"] = ""
+        response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
         self.assertEqual(400,response.status_code)
 
-
-
-
+    def test_createdby_string_error(self):
+        self.redflag["created_by"] = "joan"
+        response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+        self.assertEqual(400,response.status_code)
 
 
 

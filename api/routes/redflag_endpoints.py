@@ -18,7 +18,7 @@ def reporting():
 def report_redflag():
     request_data = request.get_json()
 
-    incident_id = len(redflags_list)+ 1
+    incident_id = len(redflags_list)+1
     created_on = request_data.get('created_on')
     created_by = request_data.get('created_by')
     incident_type = request_data.get('incident_type')
@@ -33,7 +33,6 @@ def report_redflag():
                          status,images,videos,comment)
     if control.save(redflag) !=True:
         return control.save(redflag)
-    redflags_list.append(redflag.to_dict_redflag())
     return jsonify({
          'status': 201,
          'data': redflag.to_dict_redflag(),

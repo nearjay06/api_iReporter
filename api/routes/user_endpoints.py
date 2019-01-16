@@ -26,7 +26,6 @@ def user_signup():
                   username,password, registered)
     if user_control.client(user)!=True:
         return user_control.client(user)              
-    user_list.append(user.user_dict())
     return jsonify({
                       'status': 201,
                       'data': user.user_dict(),
@@ -53,7 +52,7 @@ def admin_signup():
                   username,password, registered)
     if user_control.client(admin)!=True:
       return user_control.client(admin)
-    user_list.append(admin.user_dict())
+    # user_list.append(admin.user_dict())
     return jsonify({
                       'status': 201,
                       'data': admin.user_dict(),

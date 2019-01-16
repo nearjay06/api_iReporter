@@ -75,7 +75,20 @@ class TestEndpoints(unittest.TestCase):
         self.assertEqual(len(self.intervention),8)
 
 
+    # def test_status_integer_error(self):
+    #     self.intervention["status"] = 1234
+    #     response = self.test_client.post('/api/v1/interventions', content_type= 'application/json', data = json.dumps(self.intervention))
+    #     self.assertEqual(400,response.status_code)
 
+    def test_empty_incident_type_error(self):
+        self.intervention["incident_type"] = " "
+        response = self.test_client.post('/api/v1/interventions', content_type= 'application/json', data = json.dumps(self.intervention))
+        self.assertEqual(400,response.status_code)
+
+    # def test_empty_status_error(self):
+    #     self.redflag["status"] = ""
+    #     response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+    #     self.assertEqual(400,response.status_code)
 
 if __name__== '__main__':
  unittest.main()

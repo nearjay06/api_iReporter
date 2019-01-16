@@ -68,7 +68,7 @@ class TestEndpoints(unittest.TestCase):
                            }
 
         self.test_client.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(self.user))
-        response = self.test_client.patch('/api/v1/users/1/phone_number',
+        response = self.test_client.patch('/api/v1/users/3/phone_number',
                           content_type= 'application/json',data = json.dumps(change_phone_number))
         self.assertEqual(200,response.status_code)
         res = json.loads(response.data.decode())
@@ -81,13 +81,11 @@ class TestEndpoints(unittest.TestCase):
                         }
 
         self.test_client.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(self.user))
-        response = self.test_client.patch('/api/v1/users/1/email',content_type= 'application/json', 
+        response = self.test_client.patch('/api/v1/users/3/email',content_type= 'application/json', 
                                         data = json.dumps(change_email))
         res = json.loads(response.data.decode())
         self.assertEqual(200,response.status_code)
         self.assertTrue({"updated email address","message"},True)
-
-
 
 
     def test_delete_specific_user_with_id(self):

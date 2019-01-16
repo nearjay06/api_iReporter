@@ -36,7 +36,10 @@ def client(reserve):
     user_list.append(reserve.user_dict())
     print(user_list)
     return True
-
+  else:
+    print(user_list)
+    user_list.append(reserve.user_dict())
+    return True
 
 def login(username,password):
   
