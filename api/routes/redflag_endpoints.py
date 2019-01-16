@@ -5,7 +5,7 @@ from api.controllers import control
 import json
 from api.validations import valid
 from api import app
-from api.secure.safe import token_required
+from api.secure.safe import *
 
  
 @app.route('/', methods=['GET'])
@@ -17,7 +17,8 @@ def reporting():
 # @token_required
 def report_redflag():
     request_data = request.get_json()
-    incident_id = len(redflags_list)+1
+
+    incident_id = len(redflags_list)+ 1
     created_on = request_data.get('created_on')
     created_by = request_data.get('created_by')
     incident_type = request_data.get('incident_type')
@@ -30,9 +31,9 @@ def report_redflag():
     
     redflag = Redflags(incident_id,created_on,created_by,incident_type,location,
                          status,images,videos,comment)
-    # redflags_list.append(redflag)
     if control.save(redflag) !=True:
         return control.save(redflag)
+    redflags_list.append(redflag.to_dict_redflag())
     return jsonify({
          'status': 201,
          'data': redflag.to_dict_redflag(),

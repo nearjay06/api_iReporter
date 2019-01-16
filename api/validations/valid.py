@@ -1,6 +1,5 @@
 from flask import jsonify
 
-
 def validate_status(status):
     if status.isspace() or not status or not isinstance(status,str):
         return jsonify ({'message':'status is not in the list'}),400
