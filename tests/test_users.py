@@ -187,6 +187,8 @@ class TestEndpoints(unittest.TestCase):
         self.assertEqual(400,response.status_code)
         self.assertTrue({'email will soon be updated','message'},True)
 
+        
+
 
 if __name__== '__main__':
  unittest.main()
