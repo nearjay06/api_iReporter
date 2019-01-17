@@ -3,7 +3,7 @@ import re
 
 def validate_first_name(first_name):
     if not first_name or not isinstance(first_name,str) or first_name.isspace():
-        return jsonify ({'message':'first name is required and should be a string'}),405
+        return jsonify ({'message':'first name is required and should be a string'}),400
     return True
 
 def validate_last_name(last_name):
@@ -17,23 +17,23 @@ def validate_email(email):
     return True
 
 def validate_password(password):
-    if not password or password.isspace() or not isinstance(password,str) or len(password) > 10:
+    if not password  or not isinstance(password,str) or len(password) > 10 or password.isspace():
         return jsonify ({'message':'invalid! please provide password'}),403
     return True
 
 def validate_username(username):
-    if not username or username.isspace() or not isinstance(username,str):
+    if not username  or not isinstance(username,str) or username.isspace():
         return jsonify({'message':'sorry!please provide username and it should be a string'}),400
     return True
 
 def validate_other_names(other_names):
-    if not other_names or other_names.isspace() or not isinstance(other_names,str):
-        return jsonify({'message':'sorry!please provide othernames'}),400
+    if not other_names or not isinstance(other_names,str) or other_names.isspace() :
+        return jsonify({'message':'sorry!please provide correct othernames'}),400
     return True
 
 def validate_phone_number(phone_number):
-    if not phone_number or phone_number.isspace() or not isinstance(phone_number,str):
-        return jsonify({'message':'please provide phone number'}),400
+    if not phone_number or not isinstance(phone_number,str) or phone_number.isspace():
+        return jsonify({'message':'please provide a valid phone number'}),400
     return True
 
 def validate_isAdmin(isAdmin):

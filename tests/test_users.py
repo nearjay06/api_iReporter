@@ -22,6 +22,9 @@ class TestEndpoints(unittest.TestCase):
                            
              }
 
+    def tearDown(self):
+         user_list.clear()
+
     def test_get_all_users(self):
         response = self.test_client.get('/api/v1/users',content_type= 'application/json')
         self.assertEqual(200,response.status_code)
@@ -54,7 +57,6 @@ class TestEndpoints(unittest.TestCase):
         self.assertTrue({'created user','message'},True)
            
        
-    
     def test_get_user_with_id(self):
         self.test_client.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(self.user))
         response = self.test_client.get('/api/v1/users/1')
@@ -68,7 +70,7 @@ class TestEndpoints(unittest.TestCase):
                            }
 
         self.test_client.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(self.user))
-        response = self.test_client.patch('/api/v1/users/3/phone_number',
+        response = self.test_client.patch('/api/v1/users/1/phone_number',
                           content_type= 'application/json',data = json.dumps(change_phone_number))
         self.assertEqual(200,response.status_code)
         res = json.loads(response.data.decode())
@@ -81,7 +83,7 @@ class TestEndpoints(unittest.TestCase):
                         }
 
         self.test_client.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(self.user))
-        response = self.test_client.patch('/api/v1/users/3/email',content_type= 'application/json', 
+        response = self.test_client.patch('/api/v1/users/1/email',content_type= 'application/json', 
                                         data = json.dumps(change_email))
         res = json.loads(response.data.decode())
         self.assertEqual(200,response.status_code)
@@ -95,94 +97,85 @@ class TestEndpoints(unittest.TestCase):
 
     def test_empty_firstname_error(self):
         self.user["first_name"] = " "
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
-        self.assertEqual(405,response.status_code)
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
+        self.assertEqual(400,response.status_code)
     
     def test_firstname_integer_error(self):
         self.user["first_name"] = 123
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_empty_lastname_error(self):
          self.user["last_name"] = " "
-         response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+         response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
          self.assertEqual(400,response.status_code)
 
     def test_lastname_integer_error(self):
         self.user["last_name"] = 456
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_empty_othernames_error(self):
         self.user["other_names"] = " "
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_othernames_integer_error(self):
-        self.user["other_names"] = " "
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        self.user["other_names"] = 123
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_empty_email_error(self):
         self.user["email"] = " "
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_email_integer_error(self):
         self.user["email"] = 123456
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_email_syntax_error(self):
         self.user["email"] = "joangmail"
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_empty_password_error(self):
         self.user["password"] = " "
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(403,response.status_code)
 
     def test_password_integer_error(self):
         self.user["password"] = 123456
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(403,response.status_code)
 
     def test_password_length_error(self):
         self.user["password"] = "abcdefghijklmnopqrst"
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(403,response.status_code)
 
     def test_username_integer_error(self):
         self.user["username"] = 1234
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_empty_username_error(self):
         self.user["username"] = " "
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
     def test_empty_phonenumber_error(self):
         self.user["phone_number"] = " "
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
     
     def test_phonenumber_integer_error(self):
         self.user["phone_number"] = 345678
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
-    def test_empty_isAdmin_error(self):
-        self.user["isAdmin"] = ""
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
-        self.assertEqual(400,response.status_code)
-
-    def test_isAdmin_boolean_error(self):
-        self.user["isAdmin"] = "abcd"
-        response = self.test_client.post('/api/v1/users', content_type= 'application/json', data = json.dumps(self.user))
-        self.assertEqual(400,response.status_code)
-
+    
 
 
 if __name__== '__main__':
