@@ -95,10 +95,10 @@ class TestEndpoints(unittest.TestCase):
         response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
         self.assertEqual(400,response.status_code)
 
-    # def test_status_integer_error(self):
-    #     self.redflag["status"] = 1245
-    #     response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
-    #     self.assertEqual(400,response.status_code)
+    def test_status_integer_error(self):
+        self.redflag["status"] = 1245
+        response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+        self.assertEqual(400,response.status_code)
 
     def test_createdby_string_error(self):
         self.redflag["created_by"] = "joan"

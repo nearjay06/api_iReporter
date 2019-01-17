@@ -1,12 +1,11 @@
 from flask import jsonify
 
 def validate_status(status):
-    if status.isspace() or not status or not isinstance(status,str):
-        return jsonify ({'message':'status is not in the list'}),400
+    if  not status or not isinstance(status,str) or status.isspace():
+        return jsonify ({'message':'status is required and should be a string'}),400
     return True
 
 def check_created_by(created_by):
-    # if not created_by or not isinstance(created_by,int) or created_by.isspace():
     if not created_by or not isinstance(created_by,int):  
         return jsonify({'message':'createdby field is required and should be an integer'}),400
     return True
