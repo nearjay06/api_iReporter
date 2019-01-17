@@ -12,8 +12,8 @@ def check_created_by(created_by):
     return True
   
 def check_location(location):
-    if not location or location.isspace():
-        return jsonify({'message':'location is required'}),400
+    if not location or isinstance(location,int) or location.isspace() :
+        return jsonify({'message':'location is required and should be a string'}),400
     return True   
     
 

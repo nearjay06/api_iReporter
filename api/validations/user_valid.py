@@ -3,7 +3,7 @@ import re
 
 def validate_first_name(first_name):
     if not first_name or not isinstance(first_name,str) or first_name.isspace():
-        return jsonify ({'message':'first name is required and should be a string'}),400
+        return jsonify ({'message':'first name is required and should be a string'}),405
     return True
 
 def validate_last_name(last_name):

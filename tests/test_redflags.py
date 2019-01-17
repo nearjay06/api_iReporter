@@ -88,13 +88,13 @@ class TestEndpoints(unittest.TestCase):
         self.assertEqual(response.content_type,'application/json')
         self.assertIsInstance(self.redflag,dict)
 
-    # def test_post_redflag_error(self):
-
-    #    response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
-    #    self.assertEqual(400,response.status_code)
-
     def test_empty_status_error(self):
         self.redflag["status"] = ""
+        response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+        self.assertEqual(400,response.status_code)
+
+    def test_status_integer_error(self):
+        self.redflag["status"] = 1245
         response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
         self.assertEqual(400,response.status_code)
 
@@ -103,7 +103,20 @@ class TestEndpoints(unittest.TestCase):
         response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
         self.assertEqual(400,response.status_code)
 
+    def test_empty_createdby_error(self):
+        self.redflag["created_by"] = " "
+        response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+        self.assertEqual(400,response.status_code)
 
+    def test_empty_location_error(self):
+        self.redflag["location"] = " "
+        response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+        self.assertEqual(400,response.status_code)
+
+    def test_location_integer_error(self):
+        self.redflag["location"] = 234
+        response = self.test_client.post('/api/v1/redflags', content_type= 'application/json', data = json.dumps(self.redflag))
+        self.assertEqual(400,response.status_code)
 
 
 
@@ -112,9 +125,4 @@ if __name__== '__main__':
 
 
 
-# class TestEndpoints(unittest.TestCase):
-#     def setUp(self):
-#         self.app = app.test_client()
 
-#     def tearDown(self):
-#         redflags_list.clear()
