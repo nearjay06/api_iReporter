@@ -15,14 +15,13 @@ def check_location(location):
         return jsonify({'message':'location is required and should be a string'}),400
     return True   
     
-
 def check_comment(comment):
     if not comment or isinstance(comment,int) or comment.isspace():
         return jsonify({'message':'comment is required and should be a string'}),400
     return True
 
 def check_videos(videos):
-    if not videos or len(videos) == 0 or videos.isspace():
+    if not videos or not isinstance(videos,str) or len(videos) == 0 or videos.isspace():
         return jsonify({'message':'a video is required for the red-flag'}),400
     return True
 
@@ -33,7 +32,7 @@ def validate_incident_type(incident_type):
 
 
 def validate_images(images):
-    if not images or len(images) == 0 or not isinstance(images,str) or images.isspace():
+    if not images  or not isinstance(images,str) or len(images) == 0 or  images.isspace():
         return jsonify ({'message':'sorry! the red-flag should have an image which should be a string'}),400
     return True
 

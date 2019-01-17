@@ -175,7 +175,17 @@ class TestEndpoints(unittest.TestCase):
         response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
 
+    def test_delete_specific_user_with_id_error(self):
+        self.user['user_id'] = 3
+        response =self.test_client.delete('/api/v1/users/1', content_type= 'application/json', data = json.dumps(self.user))
+        self.assertEqual(400,response.status_code)
+
     
+    def test_update_email_error(self):
+        self.user['email'] = "ann@gmail.com"
+        response = self.test_client.patch('/api/v1/users/1/email', content_type= 'application/json', data = json.dumps(self.user))
+        self.assertEqual(400,response.status_code)
+        self.assertTrue({'email will soon be updated','message'},True)
 
 
 if __name__== '__main__':
