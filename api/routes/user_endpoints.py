@@ -52,7 +52,6 @@ def admin_signup():
                   username,password, registered)
     if user_control.client(admin)!=True:
       return user_control.client(admin)
-    # user_list.append(admin.user_dict())
     return jsonify({
                       'status': 201,
                       'data': admin.user_dict(),

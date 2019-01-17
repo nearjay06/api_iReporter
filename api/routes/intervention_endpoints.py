@@ -29,7 +29,6 @@ def create_intervention():
                               status,images,videos,comment)
     if control.save(intervention)!=True:
       return control.save(intervention)
-    # interventions_list.append(intervention.to_dict_intervention()) 
     return jsonify({
                       'status': 200,
                       'data': intervention.to_dict_intervention(),
