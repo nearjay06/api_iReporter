@@ -3,6 +3,7 @@ from api.routes.user_endpoints import app
 from api.models.user import Users,user_list,Admin,admin_access
 from api.validations import user_valid
 
+
 import json
 
 class TestEndpoints(unittest.TestCase):

@@ -5,7 +5,7 @@ from api.controllers import control
 import json
 from api.validations import valid
 from api import app
-from api.secure.safe import *
+from api.secure.safe import token_required
 
  
 @app.route('/', methods=['GET'])
