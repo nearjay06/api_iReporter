@@ -6,11 +6,14 @@ from api.validations import valid
 from api import app
 import json
 from api.secure.safe import token_required
+from api.database.db import DatabaseConnection
+
+db = DatabaseConnection()
 
 
 @app.route('/api/v1/interventions',methods=['POST'])
 # @token_required
-def create_intervention():
+def create_intervention(username):
   
     data = request.get_json()
 
@@ -27,6 +30,8 @@ def create_intervention():
         
     intervention = Interventions(incident_id,created_on,created_by,incident_type,location,
                               status,images,videos,comment)
+    # db.insert_interventions(incident_id,created_on,created_by,incident_type,location,
+                        #  status,images,videos,comment)
     if control.save(intervention)!=True:
       return control.save(intervention)
     return jsonify({
@@ -38,29 +43,29 @@ def create_intervention():
 
 @app.route('/api/v1/interventions',methods=['GET'])
 # @token_required
-def get_all_intervention_records():
+def get_all_intervention_records(present_user):
   return jsonify({'status': 200,
                   'data': interventions_list}),200
    
 
 @app.route('/api/v1/interventions/<int:incident_id>',methods=['GET'])
 # @token_required
-def get_specific_intervention_record_with_id(incident_id):
+def get_specific_intervention_record_with_id(present_user,incident_id):
   return control.get_specific_intervention(incident_id)
 
 
 @app.route('/api/v1/interventions/<int:incident_id>/location',methods=['PATCH'])
 # @token_required
-def update_intervention_record_location_with_id(incident_id):
+def update_intervention_record_location_with_id(present_user,incident_id):
   return control.edit_intervention_location(incident_id)
   
 @app.route('/api/v1/interventions/<int:incident_id>/comment',methods=['PATCH'])
 # @token_required
-def update_intervention_comment_with_id(incident_id):
+def update_intervention_comment_with_id(preset_user,incident_id):
   return control.edit_intervention_comment(incident_id)
 
 @app.route('/api/v1/interventions/<int:incident_id>', methods=['DELETE'])
 # @token_required
-def delete_specific_intervention_with_id(incident_id):
+def delete_specific_intervention_with_id(present_user,incident_id):
   return control.delete_intervention(incident_id)
   

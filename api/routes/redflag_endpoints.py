@@ -6,6 +6,9 @@ import json
 from api.validations import valid
 from api import app
 from api.secure.safe import token_required
+from api.database.db import DatabaseConnection
+
+db = DatabaseConnection()
 
  
 @app.route('/', methods=['GET'])
@@ -31,8 +34,11 @@ def report_redflag():
     
     redflag = Redflags(incident_id,created_on,created_by,incident_type,location,
                          status,images,videos,comment)
-    if control.save(redflag) !=True:
-        return control.save(redflag)
+    
+    # db.insert_redflags(incident_id,created_on,created_by,incident_type,location,
+                        #  status,images,videos,comment)
+    if control.save(redflag)!=True:
+      return control.save(redflag)
     return jsonify({
          'status': 201,
          'data': redflag.to_dict_redflag(),
@@ -42,28 +48,28 @@ def report_redflag():
   
 @app.route('/api/v1/redflags',methods=['GET'])
 # @token_required
-def get_all_redflag_records():
+def get_all_redflag_records(present_user):
     return jsonify({'status': 200,
                     'data': redflags_list}),200
     
 @app.route('/api/v1/redflags/<int:incident_id>',methods=['GET'])
 # @token_required
-def get_specific_redflag_record_with_id(incident_id):
+def get_specific_redflag_record_with_id(present_user,incident_id):
     return control.get_specific_redflag(incident_id)
     
 @app.route('/api/v1/redflags/<int:incident_id>/location',methods=['PATCH'])
 # @token_required
-def edit_redflag_record_location_with_id(incident_id):
+def edit_redflag_record_location_with_id(present_user,incident_id):
     return control.edit_location(incident_id)
     
 @app.route('/api/v1/redflags/<int:incident_id>/comment',methods=['PATCH'])
 # @token_required
-def edit_redflag_record_comment_with_id(incident_id):
+def edit_redflag_record_comment_with_id(present_user,incident_id):
     return control.edit_comment(incident_id)
   
 @app.route('/api/v1/redflags/<int:incident_id>', methods=['DELETE'])
 # @token_required
-def delete_specific_redflag_record_with_id(incident_id):
+def delete_specific_redflag_record_with_id(present_user,incident_id):
     return control.delete_redflag(incident_id)
   
   

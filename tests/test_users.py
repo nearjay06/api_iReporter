@@ -31,14 +31,14 @@ class TestEndpoints(unittest.TestCase):
         self.assertEqual(200,response.status_code)
         
     def test_user_signup(self):
-        response = self.test_client.post('/api/v1/users/signup', content_type= 'application/json',
+        response = self.test_client.post('/api/v2/auth/signup', content_type= 'application/json',
                                          data = json.dumps(self.user))
         self.assertEqual(201,response.status_code)
         self.assertTrue({'user id is required and it should be an integer','message'},True)
         self.assertEqual(len(self.user),9)
 
     def test_admin_signup(self):
-        response = self.test_client.post('/api/v1/admins/signup', content_type= 'application/json',
+        response = self.test_client.post('/api/v2?auth/admins/signup', content_type= 'application/json',
                                   data = json.dumps(self.user))
         self.assertEqual(201,response.status_code)
         self.assertTrue({'user id is required and it should be an integer','message'},True)
@@ -64,18 +64,7 @@ class TestEndpoints(unittest.TestCase):
         self.assertEqual(200,response.status_code)
         self.assertIsInstance(self.user,dict)
 
-    def test_update_phone_number_with_user_id(self):
-
-        change_phone_number = {
-                               "phone_number":"abcdefg"
-                           }
-
-        self.test_client.post('/api/v1/users/signup', content_type= 'application/json',data = json.dumps(self.user))
-        response = self.test_client.patch('/api/v1/users/1/phone_number',
-                          content_type= 'application/json',data = json.dumps(change_phone_number))
-        self.assertEqual(200,response.status_code)
-        res = json.loads(response.data.decode())
-        self.assertTrue({'updated phone number ','message'},True) 
+     
 
     def test_update_user_email_with_id(self):
        
