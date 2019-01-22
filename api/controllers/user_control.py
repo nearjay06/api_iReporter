@@ -2,51 +2,11 @@ from flask import jsonify,request
 from api.models.user import Users,user_list,Admin,admin_access
 from api.validations.user_valid import *
 from api.validations.user_valid import certify_phone_number_with_user_id
-from api.validations.user_valid import validate_first_name,validate_last_name,validate_email
-from api.validations.user_valid import validate_username,validate_other_names,validate_phone_number
-from api.validations.user_valid import check_user_id,validate_password,validate_isAdmin
+
+# from api.validations.user_valid import validate_username,validate_other_names,validate_phone_number
+# from api.validations.user_valid import check_user_id,validate_password,validate_isAdmin
 
 
-def client(reserve):
-  if validate_first_name(reserve.first_name)!=True:
-    return validate_first_name(reserve.first_name)
-
-  if validate_last_name(reserve.last_name)!= True:
-     return validate_last_name(reserve.last_name)
-
-  if validate_email(reserve.email)!= True:
-    return validate_email(reserve.email)
-
-  if validate_username(reserve.username)!=True:
-    return validate_username(reserve.username)
-
-  if validate_password(reserve.password)!= True:
-    return validate_password(reserve.password)
-
-  if validate_other_names(reserve.other_names)!=True:
-    return validate_other_names(reserve.other_names)
-
-  if validate_phone_number(reserve.phone_number)!=True:
-    return validate_phone_number(reserve.phone_number)
-  
-  if validate_isAdmin(reserve.isAdmin)!= True:
-    return validate_isAdmin(reserve.isAdmin)
-     
-  if isinstance(reserve, Users):
-    user_list.append(reserve.user_dict())
-    print(user_list)
-    return True
-  
-def login(username,password):
-  
-  if validate_username(username)!=True:
-    return validate_username(username)
-
-  if validate_password(password)!= True:
-    return validate_password(password)
-
-  return True
- 
 
 def check_phone_number_user_id(user_id):
   use = request.get_json()
@@ -93,10 +53,7 @@ def get_specific_user(user_id):
   return jsonify({'status':200,
                   'message':'user not found'})
 
-# def admin_access():
-#   for user in user_list:
-#     if user.isAdmin is True:
-#       return True
+
 def get_all_users():
   user = admin_access()
   if user:

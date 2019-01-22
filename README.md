@@ -1,7 +1,5 @@
 [![Build Status](https://travis-ci.org/nearjay06/api_iReporter.svg?branch=develop)](https://travis-ci.org/nearjay06/api_iReporter)
-
 [![Coverage Status](https://coveralls.io/repos/github/nearjay06/api_iReporter/badge.svg?branch=develop)](https://coveralls.io/github/nearjay06/api_iReporter?branch=develop)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/db3adc0af34643761152/maintainability)](https://codeclimate.com/github/nearjay06/api_iReporter/maintainability)
 
 

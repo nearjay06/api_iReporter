@@ -1,6 +1,6 @@
 import psycopg2
+from psycopg2.extras import RealDictCursor
 from pprint import pprint
-
 
 class DatabaseConnection():
     def __init__(self):
@@ -9,14 +9,14 @@ class DatabaseConnection():
                 "dbname='ireporter_database' user='postgres' host='localhost'  port= '5432'"
             )
             self.connection.autocommit = True
-            self.cursor = self.connection.cursor()
+            self.cursor = self.connection.cursor(cursor_factory=RealDictCursor)
         except:
              pprint('cannot connect to database')
 
     def create_table_users(self):
       create_table_command = "CREATE TABLE user_data(user_id SERIAL PRIMARY KEY, firstname VARCHAR(100),\
-                             lastname VARCHAR(100), othernames VARCHAR(100),email VARCHAR(50),\
-                             phonenumber VARCHAR(50),username VARCHAR(20), password VARCHAR(10),\
+                             lastname VARCHAR(100), othernames VARCHAR(100),email UNIQUE VARCHAR(50),\
+                             phonenumber VARCHAR(50),username UNIQUE VARCHAR(20), password VARCHAR(10),\
                              registered DATE,isAdmin BOOLEAN)"
       self.cursor.execute(create_table_command)
     
@@ -26,28 +26,43 @@ class DatabaseConnection():
         user = f"INSERT INTO user_data (firstname, lastname, othernames,email,\
                 phonenumber,username,password,registered,isAdmin) VALUES('{firstname}', '{lastname}',\
                 '{othernames}','{email}','{phonenumber}','{username}', '{password}','{registered}','{isAdmin}')\
-                 RETURNING user_id;"
+                 RETURNING *;"
         pprint(user)
         self.cursor.execute(user)
         return self.cursor.fetchone()
                                        
-    def get_all_users(self):
+    def insert_admins(self, firstname ,lastname , othernames,email ,phonenumber,
+                     username,password ,registered,isAdmin):
 
-       query = ("SELECT * FROM user_data;")
-       self.cursor.execute(query)
-       return self.cursor.fetchall()
-    
-    
-    def get_specific_user(self,username):
-        
-        query = """SELECT username FROM user_data WHERE user_id = {}""".format(username)
-        self.cursor.execute(query)
+        admin = f"INSERT INTO user_data (firstname, lastname, othernames,email,\
+                phonenumber,username,password,registered,isAdmin) VALUES('{firstname}', '{lastname}',\
+                '{othernames}','{email}','{phonenumber}','{username}', '{password}','{registered}','True')\
+                 RETURNING *;"
+        pprint(admin)
+        self.cursor.execute(admin)
         return self.cursor.fetchone()
+    
+    def get_users(self,username):
+    
+        query = """SELECT * FROM user_data """ 
+        self.cursor.execute(query)
+        return self.cursor.fetchall()  
+    
+    
+    
+    def get_specific_user(self,username,password):
+        
+        query = """SELECT username FROM user_data WHERE username = '{}' AND password = '{}'""".format(username, password) 
+        self.cursor.execute(query)
+        return self.cursor.fetchone() 
         
 
-    #  update user_data
-    #  delete user_data
-    #  drop table   
+
+
+
+
+      
+       
 
     
 

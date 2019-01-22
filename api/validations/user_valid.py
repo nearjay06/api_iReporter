@@ -1,45 +1,85 @@
 from flask import jsonify
 import re
 
-def validate_first_name(first_name):
-    if not first_name or not isinstance(first_name,str) or first_name.isspace():
-        return jsonify ({'message':'first name is required and should be a string'}),400
-    return True
 
-def validate_last_name(last_name):
-    if not last_name or not isinstance(last_name,str) or last_name.isspace():
-        return jsonify({'message':'last name is required and should be a string'}),400
-    return True
 
-def validate_email(email):
-    if not email or not isinstance (email,str) or email.isspace() or not re.match(r"[^@.]+@[A-Za-z]+\.[a-z]+", email):
-        return jsonify({'message':'please provide an email'}),400
-    return True
+def validate_inputs(first_name,last_name,email,password,username,other_names,phone_number,
+                     isAdmin):
 
-def validate_password(password):
-    if not password  or not isinstance(password,str) or len(password) > 10 or password.isspace():
-        return jsonify ({'message':'invalid! please provide password'}),403
-    return True
+    if not isinstance(first_name,str):
+        return ['first name must be a string',400]
 
-def validate_username(username):
-    if not username  or not isinstance(username,str) or username.isspace():
-        return jsonify({'message':'sorry!please provide username and it should be a string'}),400
-    return True
+    if not first_name  or first_name.isspace():
+        return  ['first name is required',400]
+    
+    if not isinstance(last_name,str):
+        return ['last name must not be a number',400]
+    
+    if not last_name  or last_name.isspace():
+            return ['last name is required',400]
+         
+     
+    if not isinstance(email,str):
+            return [' email must not be a number',400]
 
-def validate_other_names(other_names):
-    if not other_names or not isinstance(other_names,str) or other_names.isspace() :
-        return jsonify({'message':'sorry!please provide correct othernames'}),400
-    return True
+    if not email or  email.isspace() or not isinstance(email,str):
+            return ['please provide a valid email',400]
 
-def validate_phone_number(phone_number):
-    if not phone_number or not isinstance(phone_number,str) or phone_number.isspace():
-        return jsonify({'message':'please provide a valid phone number'}),400
-    return True
+    if not re.match(r"[^@.]+@[A-Za-z]+\.[a-z]+", email):
+        return ['invalid!  an important symbol may be missing in the email provided',400]
 
-def validate_isAdmin(isAdmin):
-    if not isinstance(isAdmin,bool):
-        return jsonify({'message':'admin is supposed to be a boolean'}),400
-    return True
+    if not isinstance(password,str):
+        return ['password must not be a number',400]    
+        
+    if  len(password) > 10:
+            return ['invalid! password should be less or equal to 10 characters',400] 
+         
+    if not password or password.isspace():
+            return ['invalid! please provide correct password',400]
+
+    if not isinstance(username,str):
+        return ['username must not be a number',400]
+
+    if not username or username.isspace():
+        return ['sorry!please provide  username',400]
+
+    if not isinstance(other_names,str):
+        return ['othernames must not be a number',400]           
+    
+    if not other_names or other_names.isspace() :
+            return ['sorry!please provide correct othernames',400]
+
+    if  not isinstance(phone_number,str):
+            return ['phone number should be a string',400]
+
+    if not phone_number or phone_number.isspace():
+            return ['please provide a valid phone number',400]
+
+    if not isinstance(phone_number,str):
+        return ['phone number must not be a letter',400] 
+
+    # if not isinstance(isAdmin,bool):
+    #     return ['admin is supposed to be a boolean',400]
+    
+def validate_needed(username,password):
+    if not isinstance(username,str):
+        return ['username must not be a number',400]    
+
+    if not username or username.isspace():
+        return ['sorry!please provide  username',400]
+
+    if not isinstance(password,str):
+        return ['password must not be a number',400]  
+
+    if  len(password) > 10:
+            return ['invalid! password should be less or equal to 10 characters',400]      
+    
+    if not password or password.isspace():
+            return ['invalid! password is required',400]
+    
+    
+
+
 
 def check_user_id(user_id):
     if not user_id  or not isinstance(user_id,int) or user_id.isspace():
