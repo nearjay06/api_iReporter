@@ -38,14 +38,16 @@ class DatabaseConnection():
        return self.cursor.fetchall()
     
     
-    def get_specific_user(self,email):
+    def get_specific_user(self,username):
         
-        query = """SELECT username FROM user_data WHERE user_id = {}""".format(email)
+        query = """SELECT username FROM user_data WHERE user_id = {}""".format(username)
         self.cursor.execute(query)
         return self.cursor.fetchone()
         
 
-        
+    #  update user_data
+    #  delete user_data
+    #  drop table   
 
     
 

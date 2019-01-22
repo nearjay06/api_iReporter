@@ -23,18 +23,16 @@ def user_signup():
     phone_number = use.get('phone_number')
     username = use.get('username')
     password = use.get('password')
-    
     isAdmin = use.get('isAdmin')
     
     user = Users( first_name, last_name, other_names, email, phone_number,
                   username,password)    
     user_id = db.insert_users(user.first_name ,user.last_name , user.other_names, user.email,
-              user.phone_number,user.username,
-                    user.password, user.registered,user.isAdmin)
+              user.phone_number, user.username, user.password, user.registered,  user.isAdmin)
                   
     return jsonify({
                       'status': 201,
-                       'user_id': user_id,
+                      'user_id': user_id,
                       'message': 'Created user data in user database'
                 }),201
 
@@ -55,7 +53,7 @@ def admin_signup():
       
     admin = Users( first_name, last_name, other_names, email, phone_number,
                   username,password)    
-    db.insert_users(admin.first_name ,admin.last_name , admin.other_names, admin.email,admin.phone_number,
+    user_id = db.insert_users(admin.first_name ,admin.last_name , admin.other_names, admin.email,admin.phone_number,
                     admin.username,admin.password, admin.registered,admin.isAdmin)
     return jsonify({
                       'status': 201,
@@ -67,11 +65,11 @@ def admin_signup():
 @app.route('/api/v2/auth/signin',methods=['POST'])
 def user_signin():
     details = request.get_json()
-    email = details.get('email')
+    username = details.get('username')
     password = details.get('password')
     
-    user = db.get_specific_user()
-    if email == user[4] and password == user[7]:
+    user = db.get_specific_user(username)
+    if username == user[6] and password == user[7]:
         generated_token = encode_token(username)
         return jsonify({
                         'status': 200,
