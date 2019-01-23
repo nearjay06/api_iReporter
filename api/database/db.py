@@ -15,8 +15,8 @@ class DatabaseConnection():
 
     def create_table_users(self):
       create_table_command = "CREATE TABLE user_data(user_id SERIAL PRIMARY KEY, firstname VARCHAR(100),\
-                             lastname VARCHAR(100), othernames VARCHAR(100),email UNIQUE VARCHAR(50),\
-                             phonenumber VARCHAR(50),username UNIQUE VARCHAR(20), password VARCHAR(10),\
+                             lastname VARCHAR(100), othernames VARCHAR(100),email VARCHAR(50) UNIQUE,\
+                             phonenumber VARCHAR(50),username VARCHAR(20) UNIQUE, password VARCHAR(10),\
                              registered DATE,isAdmin BOOLEAN)"
       self.cursor.execute(create_table_command)
     
@@ -57,16 +57,7 @@ class DatabaseConnection():
         return self.cursor.fetchone() 
         
 
-
-
-
-
-      
-       
-
-    
-
-
+    # INCIDENTS DATABASE    
 
     def create_table_incidents(self):
       create_table_command = "CREATE TABLE incident_data(incident_id SERIAL PRIMARY KEY, createdon DATE,\
@@ -76,14 +67,22 @@ class DatabaseConnection():
       self.cursor.execute(create_table_command)
 
     
-    def insert_incidents(self,incident_id , createdon , createdby , incident_type ,location ,
-                             status ,images , videos ,comment):
+    def put_incidents(self,createdon, createdby, incident_type, location, status, images, videos, comment):
 
-        incident = f"INSERT INTO redflag_data values (incident_id, createdon, createdby, incident_type,location,\
-                             status,images,videos,comment) VALUES('{incident_id}', '{createdon}', '{createdby}',\
-                              '{incident_type}','{location}','{status}','{images}', '{videos}','{comment}');"
+        incident = f"INSERT INTO incident_data (createdon, createdby, incident_type, location,\
+                    status, images, videos, comment) VALUES ('{createdon}', '{createdby}',\
+                    '{incident_type}','{location}','{status}','{images}', '{videos}','{comment}') RETURNING *;"
         pprint(incident)
         self.cursor.execute(incident)                                       
+
+
+
+
+
+
+
+
+
 
 
     
