@@ -29,7 +29,7 @@ def user_signup():
         
     
     invalid = validate_inputs(first_name,last_name,email,password,username,other_names,phone_number,
-                     isAdmin)
+                              isAdmin)
     if invalid:
         return jsonify({'message':str(invalid[0])}),invalid[1]
 

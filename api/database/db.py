@@ -72,8 +72,9 @@ class DatabaseConnection():
         incident = f"INSERT INTO incident_data (createdon, createdby, incident_type, location,\
                     status, images, videos, comment) VALUES ('{createdon}', '{createdby}',\
                     '{incident_type}','{location}','{status}','{images}', '{videos}','{comment}') RETURNING *;"
-        pprint(incident)
-        self.cursor.execute(incident)                                       
+        
+        self.cursor.execute(incident) 
+        return self.cursor.fetchone()                                      
 
 
 

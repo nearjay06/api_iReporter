@@ -1,44 +1,16 @@
 
 from flask import jsonify,request
-from api.models.incident import Interventions, Redflags,Incidents
+from api.models.incident import Interventions, Redflags,Incidents,redflags_list,interventions_list
 from api.validations.valid import validate_redflag_location_with_id 
-from api.validations.valid import validate_intervention_location_with_id
-from api.models.incident import redflags_list,interventions_list
-from api.validations.valid import validate_images,validate_incident_id,validate_incident_type
-from api.validations.valid import validate_status,check_comment,check_videos,check_created_by
-from api.validations.valid import check_location
+# from api.validations.valid import validate_intervention_location_with_id
+# from api.models.incident import redflags_list,interventions_list
+# from api.validations.valid import validate_images,validate_incident_id,validate_incident_type
+# from api.validations.valid import validate_status,check_comment,check_videos,check_created_by
+# from api.validations.valid import check_location
 
 
-def save(resource):
-  if  check_created_by(resource.created_by) != True:
-    return check_created_by(resource.created_by)
 
-  if check_location(resource.location) !=True:
-    return check_location(resource.location)
-    
-  if validate_status(resource.status)!=True:
-    return validate_status(resource.status)
 
-  if validate_images(resource.images)!=True:
-    return validate_images(resource.images)
-    
-  if check_videos(resource.videos)!=True:
-    return check_videos(resource.videos)
-    
-  if check_comment(resource.comment) !=True:
-    return check_comment(resource.comment)
-
-  if validate_incident_type(resource.incident_type)!=True:
-    return validate_incident_type(resource.incident_type)
-
-  if isinstance(resource, Interventions):
-    interventions_list.append(resource.to_dict_intervention())
-    print(interventions_list)
-    return True
-  else:
-    print(redflags_list)
-    redflags_list.append(resource.to_dict_redflag())
-    return True
 
 def edit_location(incident_id):
   request_data = request.get_json()

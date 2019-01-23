@@ -1,45 +1,62 @@
 from flask import jsonify
 
-def validate_status(status):
-    if  not status or not isinstance(status,str) or status.isspace():
-        return jsonify ({'message':'status is required and should be a string'}),400
-    return True
 
-def check_created_by(created_by):
-    if not created_by or not isinstance(created_by,int):  
-        return jsonify({'message':'createdby field is required and should be an integer'}),400
-    return True
-  
-def check_location(location):
-    if not location or isinstance(location,int) or location.isspace() :
-        return jsonify({'message':'location is required and should be a string'}),400
-    return True   
+
+def validate_interventions(created_by, incident_type, location, status, images, videos, comment):
+            
+    if not isinstance(status,str):
+        return ['status must be a string',400]
+
+    if not status  or status.isspace():
+        return  ['status is required',400]
+        
+    if not created_by :
+        return  ['required field is missing',400]
+      
+        
+    if not isinstance(created_by,int):
+        return ['created_by must be an integer',400]
+        
+    if  not isinstance(location,str):
+        return ['location must be a string',400]
+
+    if not location or location.isspace():
+        return  ['location is required',400]
+
+    if  isinstance(comment,int):
+        return ['comment must be a string',400]
+
+    if not comment or comment.isspace():
+        return  ['comment is required',400]
+
+    if not isinstance(videos,str):
+        return ['video must not be a url string',400]    
+        
+    if  len(videos) ==0 :
+            return ['invalid! please provide a video',400] 
+         
+    if not videos or videos.isspace():
+            return ['invalid! please upload  a  video',400]
+
+    if  not isinstance(incident_type,str):
+        return ['incident type must be a string',400]
+
+    if not incident_type or incident_type.isspace():
+        return  ['incident type is required',400]  
+      
+    if not isinstance(images,str):
+        return ['image must not be a url string',400]    
+        
+    if  len(images) ==0 :
+            return ['invalid! please provide an image',400] 
+         
+    if not images or images.isspace():
+            return ['invalid! please upload an image',400]
+       
     
-def check_comment(comment):
-    if not comment or isinstance(comment,int) or comment.isspace():
-        return jsonify({'message':'comment is required and should be a string'}),400
-    return True
-
-def check_videos(videos):
-    if not videos or not isinstance(videos,str) or len(videos) == 0 or videos.isspace():
-        return jsonify({'message':'a video is required for the red-flag'}),400
-    return True
-
-def validate_incident_type(incident_type):
-    if not incident_type or not isinstance(incident_type,str) or incident_type.isspace():
-        return jsonify({'message':'incident type is required and should be a string'}),400
-    return True
-
-
-def validate_images(images):
-    if not images  or not isinstance(images,str) or len(images) == 0 or  images.isspace():
-        return jsonify ({'message':'sorry! the red-flag should have an image which should be a string'}),400
-    return True
-
-def validate_incident_id(incident_id):
-    if not incident_id or not isinstance(incident_id,int) or incident_id <= 0 or incident_id.isspace():
-        return jsonify ({'message':'invalid!redflag incident id is not in the system'}),400
-    return True
+    # if not incident_id or not isinstance(incident_id,int) or incident_id <= 0 or incident_id.isspace():
+    #     return jsonify ({'message':'invalid!redflag incident id is not in the system'}),400
+    
 
 def validate_intervention_incident_id(incident_id):
     if not incident_id or not isinstance(incident_id,int) or incident_id <= 0 or incident_id.isspace():
