@@ -30,7 +30,7 @@ def validate_interventions(created_by, incident_type, location, status, images, 
         return  ['comment is required',400]
 
     if not isinstance(videos,str):
-        return ['video must not be a url string',400]    
+        return ['video must be a url string',400]    
         
     if  len(videos) ==0 :
             return ['invalid! please provide a video',400] 
@@ -45,7 +45,7 @@ def validate_interventions(created_by, incident_type, location, status, images, 
         return  ['incident type is required',400]  
       
     if not isinstance(images,str):
-        return ['image must not be a url string',400]    
+        return ['image must be a url string',400]    
         
     if  len(images) ==0 :
             return ['invalid! please provide an image',400] 
@@ -85,7 +85,7 @@ def validate_redflags(created_by, incident_type, location, status, images, video
         return  ['comment is required',400]
 
     if not isinstance(videos,str):
-        return ['video must not be a url string',400]    
+        return ['video must  be a url string',400]    
         
     if  len(videos) ==0 :
             return ['invalid! please provide a video',400] 
@@ -100,7 +100,7 @@ def validate_redflags(created_by, incident_type, location, status, images, video
         return  ['incident type is required',400]  
       
     if not isinstance(images,str):
-        return ['image must not be a url string',400]    
+        return ['image must be a url string',400]    
         
     if  len(images) ==0 :
             return ['invalid! please provide an image',400] 

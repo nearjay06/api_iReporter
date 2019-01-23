@@ -37,11 +37,11 @@ def create_intervention(username):
                             intervention.comment)
     
     return jsonify({
-                      'status': 200,
+                      'status': 201,
                       'data': db_intervention,
                       'message': 'Created intervention record'
                       
-                }),200
+                }),201
 
 
 @app.route('/api/v2/interventions',methods=['GET'])
