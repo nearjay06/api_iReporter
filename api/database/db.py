@@ -76,7 +76,11 @@ class DatabaseConnection():
         self.cursor.execute(incident) 
         return self.cursor.fetchone()                                      
 
-
+    def get_incidents(self, incident_type):
+    
+        query = """SELECT * FROM incident_data WHERE incident_type =  '{}'""".format(incident_type) 
+        self.cursor.execute(query)
+        return self.cursor.fetchall()  
 
 
 

@@ -38,17 +38,18 @@ def create_intervention(username):
     
     return jsonify({
                       'status': 200,
-                      'intervention': db_intervention,
+                      'data': db_intervention,
                       'message': 'Created intervention record'
                       
                 }),200
 
 
-@app.route('/api/v1/interventions',methods=['GET'])
-# @token_required
+@app.route('/api/v2/interventions',methods=['GET'])
+@token_required
 def get_all_intervention_records(present_user):
+  interventions = db.get_incidents('intervention')
   return jsonify({'status': 200,
-                  'data': interventions_list}),200
+                  'data': interventions}),200
    
 
 @app.route('/api/v1/interventions/<int:incident_id>',methods=['GET'])
