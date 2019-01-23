@@ -111,6 +111,18 @@ class DatabaseConnection():
         return self.cursor.execute(query)
 
 
+    def delete_intervention(self,incident_id,incident_type):
+        
+        query = """DELETE  FROM incident_data WHERE incident_id = '{}' AND incident_type = '{}'""".format(incident_id, incident_type) 
+        self.cursor.execute(query)
+         
+
+
+
+
+
+
+
 
 
 

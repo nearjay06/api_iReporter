@@ -105,13 +105,16 @@ def update_intervention_comment_with_id(preset_user,incident_id):
 
                 }),200
   
-  
-
-
-
-
-@app.route('/api/v1/interventions/<int:incident_id>', methods=['DELETE'])
-# @token_required
+@app.route('/api/v2/interventions/<int:incident_id>', methods=['DELETE'])
+@token_required
 def delete_specific_intervention_with_id(present_user,incident_id):
-  return control.delete_intervention(incident_id)
+
+  delete_incident = db.delete_intervention(incident_id, 'intervention')
+  return jsonify({
+                 'status':200,
+                  'incident_id': incident_id,
+                  'message':'deleted intervention'
+
+                }),200
+   
   
