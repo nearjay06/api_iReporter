@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_jwt import JWT
 from api.models.incident import Incidents,Interventions,interventions_list
 from api.controllers import control
-from api.validations import valid
+from api.validations.valid import validate_interventions
 from api import app
 import json
 from api.secure.safe import token_required
@@ -11,14 +11,12 @@ from api.database.db import DatabaseConnection
 db = DatabaseConnection()
 
 
-@app.route('/api/v1/interventions',methods=['POST'])
-# @token_required
+@app.route('/api/v2/interventions',methods=['POST'])
+@token_required
 def create_intervention(username):
   
     data = request.get_json()
-
-    incident_id = len(interventions_list)+1
-    created_on = data.get('created_on')
+  
     created_by = data.get('created_by')
     incident_type = data.get('incident_type')
     location = data.get('location')
@@ -27,17 +25,22 @@ def create_intervention(username):
     videos = data.get('videos')
     comment = data.get('comment')
 
-        
-    intervention = Interventions(incident_id,created_on,created_by,incident_type,location,
-                              status,images,videos,comment)
-    # db.insert_interventions(incident_id,created_on,created_by,incident_type,location,
-                        #  status,images,videos,comment)
-    if control.save(intervention)!=True:
-      return control.save(intervention)
+    wrong_intervention = validate_interventions(created_by,incident_type,location,
+                                                status, images, videos, comment)
+    if wrong_intervention:
+        return jsonify({'message':str(wrong_intervention[0])}),wrong_intervention[1] 
+
+    intervention = Incidents(created_by,incident_type,location,status,images,videos,comment)
+    db_intervention = db.put_incidents(intervention.created_on,intervention.created_by,
+                            intervention.incident_type,intervention.location,
+                            intervention.status,intervention.images,intervention.videos,
+                            intervention.comment)
+    
     return jsonify({
                       'status': 200,
-                      'data': intervention.to_dict_intervention(),
+                      'intervention': db_intervention,
                       'message': 'Created intervention record'
+                      
                 }),200
 
 

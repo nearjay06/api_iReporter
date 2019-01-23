@@ -4,10 +4,10 @@ redflags_list = []
 interventions_list = []
 class Incidents():
     
-    def __init__(self,incident_id,created_on,created_by,incident_type,location,status,
+    def __init__(self,created_by,incident_type,location,status,
                  images,videos,comment):
       
-      self.incident_id = incident_id
+      
       self.created_on = datetime.datetime.now()
       self.created_by = created_by
       self.incident_type = incident_type
