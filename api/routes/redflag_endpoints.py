@@ -19,7 +19,7 @@ def reporting():
 
 @app.route('/api/v2/redflags',methods=['POST'])
 @token_required
-def report_redflag():
+def report_redflag(present_user):
     request_data = request.get_json()
 
     created_by = request_data.get('created_by')

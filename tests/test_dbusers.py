@@ -27,24 +27,36 @@ class TestEndpoints(unittest.TestCase):
          user_list.clear()
 
     def test_get_all_users(self):
-        response = self.test_client.get('/api/v2/users',content_type= 'application/json')
-        self.assertEqual(200,response.status_code)       
-    
-      
-    
-    def test_user_signup(self):
-        response = self.test_client.post('/api/v2/auth/signup', content_type= 'application/json',
-                                         data = json.dumps(self.user))
-        self.assertEqual(201,response.status_code)
-        self.assertTrue({'user id is required and it should be an integer','message'},True)
-        self.assertEqual(len(self.user),9)
 
-    def test_admin_signup(self):
-        response = self.test_client.post('/api/v2/auth/admins/signup', content_type= 'application/json',
-                                  data = json.dumps(self.user))
-        self.assertEqual(201,response.status_code)
-        self.assertTrue({'user id is required and it should be an integer','message'},True)
-        self.assertEqual(len(self.user),9)
+        response = self.test_client.post(
+                   'api/v2/auth/signup',content_type='application/json',
+                   data=json.dumps(self.user))
+	    authenticate = json.loads(response.data.decode())
+	    response = self.test_client.get('/api/v2/auth/users',
+		           headers={'Authorization': authenticate['generated_token']},
+		            content_type='application/json',
+		           data=json.dumps(self.user)
+        )
+	    result = json.loads(response.data.decode())
+	    self.assertTrue(201,response.status_code)
+
+	
+
+    
+    
+    # def test_user_signup(self):
+    #     response = self.test_client.post('/api/v2/auth/signup', content_type= 'application/json',
+    #                                      data = json.dumps(self.user))
+    #     self.assertEqual(201,response.status_code)
+    #     self.assertTrue({'user id is required and it should be an integer','message'},True)
+    #     self.assertEqual(len(self.user),9)
+
+    # def test_admin_signup(self):
+    #     response = self.test_client.post('/api/v2/auth/admins/signup', content_type= 'application/json',
+    #                               data = json.dumps(self.user))
+    #     self.assertEqual(201,response.status_code)
+    #     self.assertTrue({'user id is required and it should be an integer','message'},True)
+    #     self.assertEqual(len(self.user),9)
 
 
     def test_user_signin(self):
