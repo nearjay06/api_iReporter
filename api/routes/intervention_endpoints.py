@@ -64,16 +64,51 @@ def get_specific_intervention_record_with_id(present_user,incident_id):
 
                 }),200
 
+@app.route('/api/v2/interventions/<int:incident_id>/status',methods=['PATCH'])
+@token_required
+def update_intervention_status_with_id(present_user,incident_id):
 
-@app.route('/api/v1/interventions/<int:incident_id>/location',methods=['PATCH'])
-# @token_required
-def update_intervention_record_location_with_id(present_user,incident_id):
-  return control.edit_intervention_location(incident_id)
+  incident_status= db.intervention_status(incident_id,'status')
   
-@app.route('/api/v1/interventions/<int:incident_id>/comment',methods=['PATCH'])
-# @token_required
+  return jsonify({
+                 'status':200,
+                  'data': incident_status,
+                  'incident_id': incident_id,
+                  'message':'updated intervention record status'
+
+                }),200
+
+@app.route('/api/v2/interventions/<int:incident_id>/location',methods=['PATCH'])
+@token_required
+def update_intervention_record_location_with_id(present_user,incident_id):
+
+  incident_location= db.intervention_location(incident_id, 'location')
+  return jsonify({
+                 'status':200,
+                  'data': incident_location,
+                  'incident_id': incident_id,
+                  'message':'updated intervention record location'
+
+                }),200
+  
+  
+@app.route('/api/v2/interventions/<int:incident_id>/comment',methods=['PATCH'])
+@token_required
 def update_intervention_comment_with_id(preset_user,incident_id):
-  return control.edit_intervention_comment(incident_id)
+
+  incident_comment= db.intervention_comment(incident_id, 'comment')
+  return jsonify({
+                 'status':200,
+                  'data': incident_comment,
+                  'incident_id': incident_id,
+                  'message':'updated intervention record comment'
+
+                }),200
+  
+  
+
+
+
 
 @app.route('/api/v1/interventions/<int:incident_id>', methods=['DELETE'])
 # @token_required
