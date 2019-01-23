@@ -82,7 +82,11 @@ class DatabaseConnection():
         self.cursor.execute(query)
         return self.cursor.fetchall()  
 
-
+    def specific_intervention(self,incident_id,incident_type):
+        
+        query = """SELECT * FROM incident_data WHERE incident_id = '{}' AND incident_type = '{}'""".format(incident_id, incident_type) 
+        self.cursor.execute(query)
+        return self.cursor.fetchone() 
 
 
 

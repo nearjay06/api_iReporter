@@ -52,10 +52,17 @@ def get_all_intervention_records(present_user):
                   'data': interventions}),200
    
 
-@app.route('/api/v1/interventions/<int:incident_id>',methods=['GET'])
-# @token_required
+@app.route('/api/v2/interventions/<int:incident_id>',methods=['GET'])
+@token_required
 def get_specific_intervention_record_with_id(present_user,incident_id):
-  return control.get_specific_intervention(incident_id)
+
+  specific_intervention = db.specific_intervention(incident_id, 'intervention')
+  return jsonify({
+                 'status':200,
+                  'data': specific_intervention,
+                  'incident_id': incident_id
+
+                }),200
 
 
 @app.route('/api/v1/interventions/<int:incident_id>/location',methods=['PATCH'])
