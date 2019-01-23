@@ -42,14 +42,14 @@ class DatabaseConnection():
         self.cursor.execute(admin)
         return self.cursor.fetchone()
     
-    def get_users(self,username):
+        
+    def get_users(self):
     
-        query = """SELECT * FROM user_data """ 
+        query = """SELECT * FROM user_data""" 
         self.cursor.execute(query)
         return self.cursor.fetchall()  
-    
-    
-    
+
+   
     def get_specific_user(self,username,password):
         
         query = """SELECT username FROM user_data WHERE username = '{}' AND password = '{}'""".format(username, password) 
@@ -116,6 +116,42 @@ class DatabaseConnection():
         query = """DELETE  FROM incident_data WHERE incident_id = '{}' AND incident_type = '{}'""".format(incident_id, incident_type) 
         self.cursor.execute(query)
          
+         # REDFLAGS
+
+    def redflag_id(self,incident_id,incident_type):
+        
+        query = """SELECT * FROM incident_data WHERE incident_id = '{}' AND incident_type = '{}'""".format(incident_id, incident_type) 
+        self.cursor.execute(query)
+        return self.cursor.fetchone() 
+
+    def redflag_status(self,incident_id,status):
+        
+        query = """UPDATE incident_data  SET status ='{}' WHERE incident_id ='{}'""".format(status,incident_id) 
+        return self.cursor.execute(query)
+
+    def redflag_location(self,incident_id,location):
+        
+        query = """UPDATE incident_data  SET location ='{}' WHERE incident_id ='{}'""".format(location,incident_id) 
+        return self.cursor.execute(query)
+
+    def redflag_incident_comment(self,incident_id,comment):
+        
+        query = """UPDATE incident_data  SET comment ='{}' WHERE incident_id ='{}'""".format(comment,incident_id) 
+        return self.cursor.execute(query)
+
+    def remove_redflag(self,incident_id,incident_type):
+        
+        query = """DELETE  FROM incident_data WHERE incident_id = '{}' AND incident_type = '{}'""".format(incident_id, incident_type) 
+        self.cursor.execute(query)
+
+
+
+
+
+
+
+
+
 
 
 

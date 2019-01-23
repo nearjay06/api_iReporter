@@ -56,65 +56,61 @@ def get_all_intervention_records(present_user):
 @token_required
 def get_specific_intervention_record_with_id(present_user,incident_id):
 
-  specific_intervention = db.specific_intervention(incident_id, 'intervention')
-  return jsonify({
-                 'status':200,
-                  'data': specific_intervention,
-                  'incident_id': incident_id
+      specific_intervention = db.specific_intervention(incident_id, 'intervention')
+      if  db.specific_intervention(incident_id,'intervention'):
+        return jsonify({
+                      'status':200,
+                      'data': specific_intervention,
+                      'incident_id': incident_id
 
-                }),200
+                    }),200
+      else:
+        return jsonify ({'message':'intervention record not found'}),400
+
 
 @app.route('/api/v2/interventions/<int:incident_id>/status',methods=['PATCH'])
 @token_required
 def update_intervention_status_with_id(present_user,incident_id):
-
   incident_status= db.intervention_status(incident_id,'status')
-  
   return jsonify({
-                 'status':200,
-                  'data': incident_status,
-                  'incident_id': incident_id,
-                  'message':'updated intervention record status'
+                    'status':200,
+                    'incident_id': incident_id,
+                    'message':'updated intervention record status'
 
-                }),200
-
+                    }),200
+  
+  
 @app.route('/api/v2/interventions/<int:incident_id>/location',methods=['PATCH'])
 @token_required
 def update_intervention_record_location_with_id(present_user,incident_id):
-
   incident_location= db.intervention_location(incident_id, 'location')
   return jsonify({
-                 'status':200,
-                  'data': incident_location,
+                  'status':200,
                   'incident_id': incident_id,
                   'message':'updated intervention record location'
-
-                }),200
-  
+                      }),200
+        
   
 @app.route('/api/v2/interventions/<int:incident_id>/comment',methods=['PATCH'])
 @token_required
 def update_intervention_comment_with_id(preset_user,incident_id):
-
   incident_comment= db.intervention_comment(incident_id, 'comment')
   return jsonify({
-                 'status':200,
-                  'data': incident_comment,
-                  'incident_id': incident_id,
-                  'message':'updated intervention record comment'
+                    'status':200,
+                      'incident_id': incident_id,
+                      'message':'updated intervention record comment'
 
-                }),200
+                    }),200
   
 @app.route('/api/v2/interventions/<int:incident_id>', methods=['DELETE'])
 @token_required
 def delete_specific_intervention_with_id(present_user,incident_id):
-
   delete_incident = db.delete_intervention(incident_id, 'intervention')
   return jsonify({
-                 'status':200,
-                  'incident_id': incident_id,
-                  'message':'deleted intervention'
+                    'status':200,
+                      'incident_id': incident_id,
+                      'message':'deleted intervention'
 
-                }),200
-   
+                    }),200
+    
   

@@ -15,8 +15,7 @@ db = DatabaseConnection()
 @app.route('/api/v2/auth/signup',methods=['POST'])
 def user_signup():
     use = request.get_json()
-    
-          
+              
     first_name = use.get('first_name')
     last_name =  use.get('last_name')
     other_names = use.get('other_names')
@@ -99,12 +98,11 @@ def user_signin():
 @app.route('/api/v2/auth/users',methods=['GET'])
 @token_required
 def get_all_users(present_user):
-    user = get_users()
-    if user:
-        generated_token = encode_token(username)
-        return jsonify({'status': 200,
-                    'data': user,
-                    'token': generated_token.decode('utf-8')
-                    
-                }),200
-    
+
+    users = db.get_users()
+    return jsonify({'status': 200,
+                  'data': users}),200
+   
+
+
+
