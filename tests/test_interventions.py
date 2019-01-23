@@ -23,7 +23,7 @@ class TestEndpoints(unittest.TestCase):
          interventions_list.clear()
 
     def test_get_all_interventions(self):
-        self.test_client.post('/api/v1/interventions', content_type= 'application/json', data = json.dumps(self.intervention))
+        self.test_client.post('/api/v2/interventions', content_type= 'application/json', data = json.dumps(self.intervention))
         response = self.test_client.get('/api/v1/interventions')
         self.assertEqual(200,response.status_code)
         self.assertNotIsInstance('location',Interventions,"message")
