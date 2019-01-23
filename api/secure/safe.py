@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = 'mysecret'
 def encode_token(user_id):
     try:
         payload = {
-            'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=30),
+            'exp':datetime.datetime.utcnow() + datetime.timedelta(hours = 2),
             'iat':datetime.datetime.utcnow(),
             'sub':user_id
         }

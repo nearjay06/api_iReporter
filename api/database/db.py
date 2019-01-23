@@ -88,6 +88,30 @@ class DatabaseConnection():
         self.cursor.execute(query)
         return self.cursor.fetchone() 
 
+    def intervention_status(self,incident_id,status):
+        
+        query = """UPDATE incident_data  SET status ='{}' WHERE incident_id ='{}'""".format(status,incident_id) 
+        return self.cursor.execute(query)
+
+    def update_status(self,incident_id,status):
+                
+        query = """SELECT * FROM incident_data WHERE incident_id = '{}' AND incident_type = '{}'""".format(incident_id, status) 
+        self.cursor.execute(query)
+        return self.cursor.fetchone() 
+
+        
+    def intervention_location(self,incident_id,location):
+        
+        query = """UPDATE incident_data  SET location ='{}' WHERE incident_id ='{}'""".format(location,incident_id) 
+        return self.cursor.execute(query)
+
+    def intervention_comment(self,incident_id,comment):
+        
+        query = """UPDATE incident_data  SET comment ='{}' WHERE incident_id ='{}'""".format(comment,incident_id) 
+        return self.cursor.execute(query)
+
+
+
 
 
 
