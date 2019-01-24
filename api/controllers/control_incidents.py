@@ -2,13 +2,6 @@
 from flask import jsonify,request
 from api.models.incident import Interventions, Redflags,Incidents,redflags_list,interventions_list
 from api.validations.valid import validate_redflag_location_with_id 
-# from api.validations.valid import validate_intervention_location_with_id
-# from api.models.incident import redflags_list,interventions_list
-# from api.validations.valid import validate_images,validate_incident_id,validate_incident_type
-# from api.validations.valid import validate_status,check_comment,check_videos,check_created_by
-# from api.validations.valid import check_location
-
-
 
 
 

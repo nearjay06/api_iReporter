@@ -8,10 +8,14 @@ install:
   - pip install coverage
   - pip install overalls
 
+services:
+  - postgresql
+
 script:
   - coverage run -m pytest
   - coverage xml
   - coverage report
+  - nosetests --with-coverage --cover-tests
 
 after_success:
   - coveralls

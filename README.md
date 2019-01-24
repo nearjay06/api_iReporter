@@ -32,6 +32,7 @@ iReporter is a platform that enables citizens to report incidences of corruption
 ### Installations
 
 - $ pip install -r requirements.txt
+- $ pip install jwt
 
 ### Activate Virtual Environment
 
@@ -52,26 +53,26 @@ iReporter is a platform that enables citizens to report incidences of corruption
 
 | URL Endpoint | HTTP Methods | Summary |
 | -------- | ------------- | --------- |
-| `api/v1/red-flags` | `POST`  | Creates a new red-flag|
-| `api/v1/red-flags` | `GET`  | Gets red-flag records|
-| `api/v1/red-flags/<int:incident-id>` | `GET` | Retrieves a specific red-flag| 
-| `api/v1/red-flags/<int:incident-id>/location` | `PATCH` | Update a redflag location|
-| `api/v1/red-flags/<int:incident-id>/comment` | `PATCH` | Update a red-flag comment |
-| `api/v1/red-flags/<int:incident-id>` | `DELETE`  | Delete a specific red-flag|
-| `api/v1/interventions` | `POST`  | Creates a new intervention|
-| `api/v1/interventions` | `GET`  | Gets interventions records|
-| `api/v1/interventions/<int:incident-id>` | `GET`  | Gets a specific intervention|
-| `api/v1/interventions/<int:incident-id>/location` | `PATCH`  | Updates intervention location |
+| `api/v2/red-flags` | `POST`  | Creates a new red-flag|
+| `api/v2/red-flags` | `GET`  | Gets red-flag records|
+| `api/v2/red-flags/<int:incident-id>` | `GET` | Retrieves a specific red-flag| 
+| `api/v2/redflags/<int:incident-id>/status` | `PATCH`  | Updates redflag status |
+| `api/v2/red-flags/<int:incident-id>/location` | `PATCH` | Update a redflag location|
+| `api/v2/red-flags/<int:incident-id>/comment` | `PATCH` | Update a red-flag comment |
+| `api/v2/red-flags/<int:incident-id>` | `DELETE`  | Delete a specific red-flag|
+| `api/v2/interventions` | `POST`  | Creates a new intervention|
+| `api/v2/interventions` | `GET`  | Gets interventions records|
+| `api/v2/interventions/<int:incident-id>` | `GET`  | Gets a specific intervention|
+| `api/v2/interventions/<int:incident-id>/status` | `PATCH`  | Updates intervention status|
+| `api/v2/interventions/<int:incident-id>/location` | `PATCH`  | Updates intervention location|
 | `api/v1/interventions/<int:incident-id>/comment` | `PATCH`  | Upadtes intervention comment|
 | `api/v1/interventions/<int:incident-id>` | `DELETE`  | Deletes and intervention record|
-| `api/v1/users/signup` | `POST`  | Creates a new user|
-| `api/v1/admins/signup` | `POST`  | Creates a new admin|
-| `api/v1/users/signin` | `POST`  | Users can sign in|
-| `api/v1/users` | `GET`  | Gets all users|
-| `api/v1/users/<int:user-id>` | `GET`  | Gets specific user record|
-|`api/v1/users/<int:userid>/phonenumber` | `PATCH` | Update user phonenumber|   
-|`api/v1/users/<int:userid>/email` |`PATCH`|Update user email|
-| `api/v1/users/<int:userid>` | `DELETE`  | Deletes a user record|
+| `api/v2/auth/signup` | `POST`  | Enables a new user to signup|
+| `api/v2/auth/admins/signup` | `POST`  | Enables  a new admin to signup|
+| `api/v2/auth/signin` | `POST`  | Users can sign in|
+| `api/v2/users` | `GET`  | Gets all users|
+| `api/v2/users/<int:user-id>` | `GET`  | Gets specific user record|
+
 
 ### User Endpoint Example
  
@@ -124,6 +125,7 @@ iReporter is a platform that enables citizens to report incidences of corruption
 
 - python3
 - flask
+- jwt
 
 ### AUTHOR
 
