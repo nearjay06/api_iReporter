@@ -89,7 +89,7 @@ def user_signin():
         generated_token = encode_token(username)
         return jsonify({
                             'status': 200,
-                            'u':user,
+                            'user':user,
                             'token': generated_token.decode('utf-8')
                         }),200
     else:

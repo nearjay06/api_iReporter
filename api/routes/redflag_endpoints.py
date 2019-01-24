@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_jwt import JWT
 from api.models.incident import Incidents, Redflags, redflags_list
-from api.controllers import control
+from api.controllers import control_incidents
 import json
 from api.validations import valid
 from api import app

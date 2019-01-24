@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_jwt import JWT
 from api.models.incident import Incidents,Interventions,interventions_list
-from api.controllers import control
+from api.controllers import control_incidents
 from api.validations.valid import validate_interventions
 from api import app
 import json

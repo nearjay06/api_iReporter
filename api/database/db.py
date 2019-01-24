@@ -1,9 +1,18 @@
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from pprint import pprint
+import os
 
 class DatabaseConnection():
     def __init__(self):
+
+        if os.getenv('DB_NAME') == 'ireporter_testing':
+            self.db_name = 'ireporter_testing'
+        else:
+            self.db_name = 'ireporter_database'
+
+        pprint(self.db_name)
+
         try:
             self.connection = psycopg2.connect(
                 "dbname='ireporter_database' user='postgres' host='localhost'  port= '5432'"
@@ -12,11 +21,12 @@ class DatabaseConnection():
             self.cursor = self.connection.cursor(cursor_factory=RealDictCursor)
         except:
              pprint('cannot connect to database')
-
+       
+    
     def create_table_users(self):
-      create_table_command = "CREATE TABLE user_data(user_id SERIAL PRIMARY KEY, firstname VARCHAR(100),\
-                             lastname VARCHAR(100), othernames VARCHAR(100),email VARCHAR(50) UNIQUE,\
-                             phonenumber VARCHAR(50),username VARCHAR(20) UNIQUE, password VARCHAR(10),\
+      create_table_command = "CREATE TABLE IF NOT EXISTS user_data(user_id SERIAL PRIMARY KEY, firstname VARCHAR(100),\
+                             lastname VARCHAR(100), othernames VARCHAR(100),email VARCHAR(50),\
+                             phonenumber VARCHAR(50),username VARCHAR(20), password VARCHAR(10),\
                              registered DATE,isAdmin BOOLEAN)"
       self.cursor.execute(create_table_command)
     
@@ -60,7 +70,8 @@ class DatabaseConnection():
     # INCIDENTS DATABASE    
 
     def create_table_incidents(self):
-      create_table_command = "CREATE TABLE incident_data(incident_id SERIAL PRIMARY KEY, createdon DATE,\
+
+      create_table_command = "CREATE TABLE IF NOT EXISTS incident_data (incident_id SERIAL PRIMARY KEY, createdon DATE,\
                              createdby INT, incident_type VARCHAR(100),location VARCHAR(100),\
                              status VARCHAR(100),images VARCHAR(100), videos VARCHAR(100),\
                              comment VARCHAR(140));"
@@ -145,29 +156,24 @@ class DatabaseConnection():
         self.cursor.execute(query)
 
 
+    #DROP TABLES
+
+    def drop_table_incidents(self):
+               
+        self.cursor.execute(
+            "DROP TABLE IF EXISTS incident_data")
+
+    def drop_table_users(self):
+               
+        self.cursor.execute(
+            "DROP TABLE IF EXISTS user_data")
+ 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
+ 
     
 if __name__ == '__main__':
    database_connection = DatabaseConnection()

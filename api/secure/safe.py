@@ -111,6 +111,7 @@ def token_required(f):
 
 
 
+
 def authenticate (username,password):
     user = username.get(username,None)
     if user and safe_str_cmp(user.password,password):
