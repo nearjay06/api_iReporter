@@ -20,6 +20,7 @@ Flask==1.0.2
 Flask-JWT==0.3.2
 Flask-JWT-Extended==3.13.1
 Flask-RESTful==0.3.6
+Flask-Testing==0.7.1
 funcsigs==1.0.2
 futures==3.1.1
 gunicorn==19.9.0
