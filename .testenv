@@ -1,1 +1,2 @@
 export 'DB_NAME'='ireporter_testing'
+export 'DB_HOST'='localhost'

@@ -21,6 +21,12 @@ class BaseTests(unittest.TestCase):
             "username": "trickster"              
                 }
 
+        self.signin = {
+            "password":"lalaland",
+            "username": "trickster"
+
+            }
+
         self.intervention = {
                 "comment": "blaj",
                 "created_by": 456,
