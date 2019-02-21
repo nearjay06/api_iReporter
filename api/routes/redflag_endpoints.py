@@ -42,14 +42,13 @@ def report_redflag(present_user):
                             redflag.comment)
     
     return jsonify({
-                      'status': 200,
+                      'status': 201,
                       'data': db_redflag,
                       'message': 'Created redflag record'
                       
-                }),200
+                }),201
 
-    
-     
+       
 @app.route('/api/v2/redflags',methods=['GET'])
 @token_required
 def get_all_redflag_records(present_user):
@@ -108,7 +107,7 @@ def update_redflag(preset_user,incident_id):
   return jsonify({
                  'status':200,
                   'incident_id': incident_id,
-                  'message':'update redflag comment'
+                  'message':'updated redflag comment'
 
                 }),200
 

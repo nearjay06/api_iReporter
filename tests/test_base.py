@@ -1,5 +1,7 @@
 from api.database.db import DatabaseConnection
-from api import app
+from api.routes.user_endpoints import app
+from api.routes.redflag_endpoints import app
+from api.routes.intervention_endpoints import app
 import unittest
 
 
@@ -21,7 +23,7 @@ class BaseTests(unittest.TestCase):
             "username": "trickster"              
                 }
 
-        self.signin = {
+        self.credentials = {
             "password":"lalaland",
             "username": "trickster"
 
@@ -53,8 +55,6 @@ class BaseTests(unittest.TestCase):
                 }
 
     
-
-
     def tearDown(self):
          self.db.drop_table_incidents()
          self.db.drop_table_users()
