@@ -3,6 +3,7 @@ import json
 from tests.test_base import BaseTests 
 from api.secure.safe import encode_token
 
+
 class TestEndpoints(BaseTests):
      
     def test_get_all_users(self):
