@@ -10,7 +10,6 @@ from api.database.db import DatabaseConnection
 
 db = DatabaseConnection()
 
-
 @app.route('/api/v2/interventions',methods=['POST'])
 @token_required
 def create_intervention(username):

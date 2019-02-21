@@ -7,42 +7,40 @@ class TestEndpoints(BaseTests):
      
     def test_get_all_users(self):
         response = self.test_client.post(
+            '/api/v2/auth/signup',
+            content_type='application/json',
+            data=json.dumps(self.user)
+        )
+
+        response = self.test_client.post(
             '/api/v2/auth/signin',
             content_type='application/json',
-            data=json.dumps(self.user)
+            data=json.dumps(self.credentials)
         )
         
-        auth = json.loads(response.data.decode("sub",('utf-8')))
+        result = json.loads(response.data.decode())
+        print(result)
+        auth = result['token']
         response = self.test_client.get(
             '/api/v2/auth/users',
-            headers={'Authorization': auth['token']},
+            headers={'Authorization': auth},
             content_type='application/json',
             data=json.dumps(self.user)
         )
-        result = json.loads(response.data.decode())
+        result = json.loads(response.data)
         self.assertEqual(200,response.status_code)
         
-
-        
-    
+                   
     def test_user_signup(self):
         response = self.test_client.post(
             '/api/v2/auth/signup',
             content_type='application/json',
             data=json.dumps(self.user)
         )
-        
-        auth = json.loads(response.data.decode("",('utf-8')))
-        response = self.test_client.post(
-            '/api/v2/auth/signup',
-            headers={'Authorization': auth['token']},
-            content_type='application/json',
-            data=json.dumps(self.user)
-        )
-        result = json.loads(response.data.decode())
+        result = json.loads(response.data)
         self.assertEqual(201,response.status_code)
         self.assertTrue({'username must not be a number','message'},True)
-        self.assertEqual(len(self.user),9)
+        self.assertEqual(len(self.user),7)
                  
    
     def test_admin_signup(self):
@@ -51,41 +49,27 @@ class TestEndpoints(BaseTests):
             content_type='application/json',
             data=json.dumps(self.user)
         )
-        auth = json.loads(response.data.decode())
-        response = self.test_client.post(
-            '/api/v2/auth/admins/signup',
-            headers={'Authorization': auth['token']},
-            content_type='application/json',
-            data=json.dumps(self.user)
-        )
-        result = json.loads(response.data.decode())
+        result = json.loads(response.data)
         self.assertEqual(201,response.status_code)
         self.assertTrue({'sorry!please provide correct othernames','message'},True)
-        self.assertEqual(len(self.user),9)
+        self.assertEqual(len(self.user),7)
         
 
     def test_user_signin(self):
         response = self.test_client.post(
-            '/api/v2/auth/signup',
-            content_type='application/json',
-            data=json.dumps(self.user)
-        )
-        
-        auth = json.loads(response.data.decode("",('utf-8')))
-        response = self.test_client.post(
             '/api/v2/auth/signin',
-            headers={'Authorization': auth['token']},
             content_type='application/json',
-            data=json.dumps(self.user)
+            data=json.dumps(self.credentials)
         )
         result = json.loads(response.data.decode())
         self.assertEqual(200,response.status_code)
         self.assertTrue({'created user','message'},True)
+          
            
-       
     def test_empty_firstname_error(self):
         self.user["first_name"] = " "
-        response = self.test_client.post('/api/v2/auth/signup', content_type= 'application/json', data = json.dumps(self.user))
+        response = self.test_client.post('/api/v2/auth/signup', content_type= 'application/json', 
+                                         data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
     
     def test_firstname_integer_error(self):
@@ -162,12 +146,4 @@ class TestEndpoints(BaseTests):
         self.user["phone_number"] = 345678
         response = self.test_client.post('/api/v2/auth/signup', content_type= 'application/json', data = json.dumps(self.user))
         self.assertEqual(400,response.status_code)
-
-    
-
-        
-
-
-
-
 

@@ -6,16 +6,22 @@ import re
 def validate_inputs(first_name,last_name,email,password,username,other_names,phone_number,
                      isAdmin):
 
-    if not isinstance(first_name,str):
-        return ['first name must be a string',400]
-
-    if not first_name  or first_name.isspace():
+    if not first_name:   
         return  ['first name is required',400]
     
+    if not isinstance(first_name,str):
+        return ['first name must be a string',400]
+    
+    if first_name.isspace():
+        return ['first name cannot be blank',400]
+    
+    if not last_name:
+        return  ['last name is required',400]
+
     if not isinstance(last_name,str):
         return ['last name must not be a number',400]
     
-    if not last_name  or last_name.isspace():
+    if  last_name.isspace():
             return ['last name is required',400]
          
      
