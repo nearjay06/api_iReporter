@@ -7,6 +7,7 @@ from api import app
 from api.validations.user_valid import validate_inputs,validate_needed
 from api.secure.safe import *
 
+
 from api.database.db import DatabaseConnection
 
 db = DatabaseConnection()
